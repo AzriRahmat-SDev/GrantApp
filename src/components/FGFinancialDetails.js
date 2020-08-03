@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {MuiThemeProvider, AppBar} from "@material-ui/core";
 
 export class FGFinancialDetails extends Component {
     
