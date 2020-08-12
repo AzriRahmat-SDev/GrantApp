@@ -13,16 +13,18 @@ import TextField from 'material-ui/TextField';
 
 export class FGPersonalDetails extends Component {
 
-    handleContinue = e => {
+   constructor(props){
+        super(props);
+        console.log(this.props)  //to see if the props from UserForm gets Parse into FGPersonalDetails (ANS: Yes it does but it doesnt show in the webpage)
+    } 
+    continue = e => {
         e.preventDefault();
         this.props.nextStep();
     };
-
+    
     render() {
-        const { values } = this.props;
-
+        const { values,handleChange } = this.props;
         return (
-
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title="HDB Family Grant Eligibility"/>
@@ -40,18 +42,19 @@ export class FGPersonalDetails extends Component {
                                 </RadioGroup>
                             </FormControl>
                         <ListItem primaryText="Enter Your Current Age"/>
-                            <TextField 
+                            <TextField
+                                hintText = "Enter Your Current Age Here"
                                 floatingLabelFixed='currentAge'
-                                onChange={this.handleChange}
-                                defaultValue={values}
-                        />
+                                onChange={handleChange('currentAge')}
+                                defaultValue={values.currentAge}
+                                />
                         <ListItem primaryText="Are You A First Time Buyer?"/>
                             <FormControl component="fieldset">
                                     <RadioGroup aria-label="firstTimeBuyers" 
                                     name="firstTimeBuyer" 
-                                    value={this.state} 
-                                    onChange={this.handleCheck} 
-                                    defaultValue={values}>
+                                    value={values.firsTimeBuyer} 
+                                    onChange={handleChange('firstTimeBuyer')} //unable to capture the response but and pressthe button
+                                    defaultValue={values.firsTimeBuyer}>
                                     <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                                     <FormControlLabel value="no" control={<Radio />} label="No" />
                                 </RadioGroup>
@@ -60,9 +63,10 @@ export class FGPersonalDetails extends Component {
                             primaryText="Remaining Lease of Flat?"
                             />
                             <TextField 
+                                hintText = "Enter The Remaining Lease of Flat"
                                 floatingLabelFixed='lease'
-                                onChange={this.handleChange}
-                                defaultValue={values}
+                                onChange={handleChange('lease')}
+                                defaultValue={values.lease}
                             />
                         <ListItem primaryText="Type of Flat (Number of Rooms)"/>
                             <FormControl component="fieldset">
@@ -80,7 +84,7 @@ export class FGPersonalDetails extends Component {
                         label="Continue"
                         primary={true}
                         style={styles.button}
-                        onClick={this.handleContinue}
+                        onClick={this.continue}
                     />
                 </React.Fragment>
             </MuiThemeProvider>
