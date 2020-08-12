@@ -18,7 +18,6 @@ function App() {
         <Route exact path="/" component={HomePage}/>
         <Route exact path="/HomePage" component={HomePage}/>
         <Route exact path="/FGPersonalDetails" component={UserForm}/>
-        <Route exact path="/FGFinancialDetails" component={UserForm}/>
         <Route exact path="/EHGPersonalDetails" component={EHGPersonalDetails}/>
         <Route exact path="/PGPersonalDetails" component={PGPersonalDetails}/>
       </div>
