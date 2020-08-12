@@ -1,8 +1,20 @@
-import React, { Component } from 'react'
-import {MuiThemeProvider, AppBar} from "@material-ui/core";
+import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
+import { List,ListItem } from 'material-ui/List';
+import RaisedButton from  'material-ui/RaisedButton';
 
 export class FGFinancialDetails extends Component {
-    
+
+    state={
+        open:false,
+        setOpen:false,
+    }
     continue = e => {
         e.preventDefault();
         this.props.nextStep();
@@ -12,21 +24,90 @@ export class FGFinancialDetails extends Component {
         this.props.prevStep();
     };
 
+
     render() {
         const { values,handleChange } = this.props;
                 return (
                     <MuiThemeProvider>
                         <React.Fragment>
-                            <AppBar title = "Enter Personal Details"/>
-                        </React.Fragment>
-                    </MuiThemeProvider>
-                );
-            }
-        }
-
+                            <AppBar title="HDB Family Grant Eligibility"/>
+                                <List>
+                                    <ListItem primaryText="Please choose you family nucleus"/>
+                                        <Button className={styles.button} onClick={this.handleOpen}>
+                                            Selection: 
+                                        </Button>
+                                        <FormControl className={styles.formControl}>
+                                            <InputLabel id="family-nucleus"></InputLabel>
+                                            <Select
+                                            labelId="family-nucleus-open-select-label"
+                                            id="family-nucleus"
+                                            open={this.open}
+                                            onClose={this.handleClose}
+                                            onOpen={this.handleOpen}
+                                            value={values.familyNucleus}
+                                            onChange={handleChange('familyNucleus')}
+                                            >
+                                            <br/>
+                                            <MenuItem value= {1}>
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={1}>Spouse and children(if any)</MenuItem>
+                                            <MenuItem value={2}>Children under legal custody</MenuItem>
+                                            <MenuItem value={3}>Newlyweds</MenuItem>
+                                            <MenuItem value={4}>Soon to be spouse</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                        <ListItem primaryText="What's your total income ceiling?(include extend family members if needed): "/>
+                                        <Button className={styles.button} onClick={this.handleOpen}>
+                                            Selection: 
+                                        </Button>
+                                        <FormControl className={styles.formControl}>
+                                            <InputLabel id="financial-status"></InputLabel>
+                                            <Select
+                                            labelId="financial-status-open-select-label"
+                                            id="financial-status"
+                                            open={this.open}
+                                            onClose={this.handleClose}
+                                            onOpen={this.handleOpen}
+                                            value={values.financialStatus}
+                                            onChange={handleChange('financialStatus')}
+                                            >
+                                            <br/>
+                                            <MenuItem value="">
+                                                <em>None</em>
+                                            </MenuItem>
+                                            <MenuItem value={1}>Below or equals to $14000 per month</MenuItem>
+                                            <MenuItem value={2}>Between $14000 to $21000 per month</MenuItem>
+                                            <MenuItem value={3}>Above $21000 per month</MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                </List>
+                                <RaisedButton
+                                    label="Continue"
+                                    primary={true}
+                                    style={styles.button}
+                                    onClick={this.continue}
+                                />
+                                <RaisedButton
+                                    label="Back"
+                                    primary={false}
+                                    style={styles.button}
+                                    onClick={this.back}
+                                />
+                            </React.Fragment>
+                        </MuiThemeProvider>
+            )
+    }
+}
 const styles = {
     button: {
-        margin: 15
+        margin: 15,
+        marginTop: 2,
+        primary: true
+    },
+    formControl: {
+        margin: 1,
+        minWidth: 120,
     }
 }
 
