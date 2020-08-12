@@ -15,7 +15,7 @@ export class FGPersonalDetails extends Component {
 
    constructor(props){
         super(props);
-        console.log(this.props)  //to see if the props from UserForm gets Parse into FGPersonalDetails (ANS: Yes it does but it doesnt show in the webpage)
+        console.log(this.props)  //to see if the props fr
     } 
     continue = e => {
         e.preventDefault();
