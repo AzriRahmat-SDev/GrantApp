@@ -15,7 +15,7 @@ export class FGPersonalDetails extends Component {
 
    constructor(props){
         super(props);
-        console.log(this.props)  //to see if the props 
+        console.log(this.props)  //to see if the props gf
     } 
     continue = e => {
         e.preventDefault();
