@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import FGPersonalDetails from './FGPersonalDetails'
 import FGFinancialDetails from './FGFinancialDetails'
 import FGConfirm from './FGConfirm'
+import PGPersonalDetails from './PGPersonalDetails'
 
 export class UserForm extends Component {
 
@@ -13,7 +14,8 @@ export class UserForm extends Component {
         lease: null,
         typeOfFlat: '',
         familyNucleus: 0,
-        financialStatus: 0
+        financialStatus: 0,
+        maritialStatus: 0
     }
 
     nextStep = () => {
@@ -33,7 +35,7 @@ export class UserForm extends Component {
     nextStepPG = () =>{
         const { step } = this.state;
         this.setState({
-            step: step + 5
+            step: step + 7
         });
     }
 
@@ -54,7 +56,7 @@ export class UserForm extends Component {
     prevStepPG = () =>{
         const { step } = this.state;
         this.setState({
-            step: step - 5
+            step: step - 7
         });
     }
 
@@ -67,8 +69,9 @@ export class UserForm extends Component {
             firstTimeBuyers: '',
             lease:'',
             typeOfFlat:'',
-            familyNucleus: 1,
-            financialStatus: 1
+            familyNucleus: 0,
+            financialStatus: 0,
+            maritialStatus: 0
         })
     }
 
@@ -114,6 +117,17 @@ export class UserForm extends Component {
                     <FGConfirm
                     nextStep={this.nextStep}
                     prevStep={this.prevStep}
+                    values={values}
+                    />
+                );
+            case 7:
+                return(
+                    <PGPersonalDetails
+                    nextStep={this.nextStepPG}
+                    prevStep={this.prevStepPG}
+                    handleChange={this.handleChange}
+                    handleClose={this.handleClose}
+                    handleOpen={this.handleOpen}
                     values={values}
                     />
                 );
