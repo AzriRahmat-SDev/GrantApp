@@ -16,6 +16,7 @@ function App() {
       <div className="App">
         <Navigation/>
         <Route exact path="/" component={HomePage}/>
+        <Route exact path="/GrantApp" component={HomePage}/>
         <Route exact path="/HomePage" component={HomePage}/>
         <Route exact path="/FGPersonalDetails" component={UserForm}/>
         <Route exact path="/EHGPersonalDetails" component={EHGPersonalDetails}/>

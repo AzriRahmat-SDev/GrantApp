@@ -6,10 +6,6 @@ import RaisedButton from  'material-ui/RaisedButton'
 
 export class FGConfirm extends Component {
 
-    constructor(props){
-        super(props);
-    }
-
     continue = e => {
         e.preventDefault();
         //Process form here (data sent to back end api)
