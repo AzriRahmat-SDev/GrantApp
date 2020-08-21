@@ -27,7 +27,7 @@ export class FGPersonalDetails extends Component {
         return (
             <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar title="HDB Family Grant Eligibility"/>
+                    <AppBar title="CPF Housing Grant Eligibility"/>
                     <List> 
                         <ListItem primaryText="Enter Your Citizenship"/>
                             <FormControl component="fieldset">

@@ -19,7 +19,7 @@ function Navigation() {
                 </Link>
                 {/* </button> */}
                 <Link style={NavigationStyles} to="/FGPersonalDetails">
-                    <li>Family Grant</li>
+                    <li>CPF Housing Grant</li>
                 </Link>
                 <Link style={NavigationStyles} to="/EHGPersonalDetails">
                     <li>Enhance CPF Housing Grant</li>

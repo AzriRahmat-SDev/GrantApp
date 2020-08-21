@@ -30,7 +30,7 @@ export class FGFinancialDetails extends Component {
                 return (
                     <MuiThemeProvider>
                         <React.Fragment>
-                            <AppBar title="HDB Family Grant Eligibility"/>
+                            <AppBar title="CPF Housing Grant Eligibility"/>
                                 <List>
                                     <ListItem primaryText="Please choose you family nucleus"/>
                                         <Button className={styles.button} onClick={this.handleOpen}>

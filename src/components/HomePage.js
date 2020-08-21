@@ -6,7 +6,7 @@ export class HomePage extends Component {
     render() {
         return (
             <div>
-                <h1> this is the home page when you click the nav bar</h1>
+                <h1> Welcome to the homepage of this app</h1>
             </div>
         )
     }
