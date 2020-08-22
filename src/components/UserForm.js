@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import FGPersonalDetails from './FGPersonalDetails'
 import FGFinancialDetails from './FGFinancialDetails'
 import FGConfirm from './FGConfirm'
-import PGPersonalDetails from './PGPersonalDetails'
+import FGResults from './FGResults'
 
 export class UserForm extends Component {
 
@@ -13,9 +13,8 @@ export class UserForm extends Component {
         firstTimeBuyers: '',
         lease: null,
         typeOfFlat: '',
-        familyNucleus: 0,
-        financialStatus: 0,
-        maritialStatus: 0
+        familyNucleus: null,
+        financialStatus: null
     }
 
     nextStep = () => {
@@ -25,38 +24,10 @@ export class UserForm extends Component {
         });
     }
 
-    nextStepEHG = () =>{
-        const { step } = this.state;
-        this.setState({
-            step: step + 3
-        });
-    }
-
-    nextStepPG = () =>{
-        const { step } = this.state;
-        this.setState({
-            step: step + 7
-        });
-    }
-
     prevStep = () => {
         const { step } = this.state;
         this.setState({
             step: step - 1
-        });
-    }
-
-    prevStepEHG = () =>{
-        const { step } = this.state;
-        this.setState({
-            step: step - 3
-        });
-    }
-
-    prevStepPG = () =>{
-        const { step } = this.state;
-        this.setState({
-            step: step - 7
         });
     }
 
@@ -71,9 +42,36 @@ export class UserForm extends Component {
             typeOfFlat:'',
             familyNucleus: 0,
             financialStatus: 0,
-            maritialStatus: 0
         })
     }
+
+    // nextStepEHG = () =>{
+    //     const { step } = this.state;
+    //     this.setState({
+    //         step: step + 3
+    //     });
+    // }
+
+    // nextStepPG = () =>{
+    //     const { step } = this.state;
+    //     this.setState({
+    //         step: step + 7
+    //     });
+    // }
+
+    // prevStepEHG = () =>{
+    //     const { step } = this.state;
+    //     this.setState({
+    //         step: step - 3
+    //     });
+    // }
+
+    // prevStepPG = () =>{
+    //     const { step } = this.state;
+    //     this.setState({
+    //         step: step - 7
+    //     });
+    // }
 
     handleChange = input => e => {
         this.setState({[input]: e.target.value});
@@ -93,7 +91,7 @@ export class UserForm extends Component {
         const values = { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus, financialStatus };
 
         switch(step){
-            case 1:
+            default:
                 return(
                     <FGPersonalDetails
                     nextStep={this.nextStep}
@@ -120,14 +118,10 @@ export class UserForm extends Component {
                     values={values}
                     />
                 );
-            case 7:
+            case 4:
                 return(
-                    <PGPersonalDetails
-                    nextStep={this.nextStepPG}
-                    prevStep={this.prevStepPG}
-                    handleChange={this.handleChange}
-                    handleClose={this.handleClose}
-                    handleOpen={this.handleOpen}
+                    <FGResults
+                    backToHome={this.backToHome}
                     values={values}
                     />
                 );

@@ -113,7 +113,7 @@ const styles = {
 
 export default FGFinancialDetails
 
-{/* <div>
+/* <div>
 <label for="familynucleus">Please choose your family nucleus: </label>
 <select name="familynucleus" id="familynucleus">
     <option value="ExFam">Spouse and children(if any)</option>
@@ -128,4 +128,4 @@ export default FGFinancialDetails
     <option value="2">Between $14000 to $21000 per month</option>
     <option value="3">Above $21000 per month</option>
 </select>
-<br></br> */}
+<br></br> */
