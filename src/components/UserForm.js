@@ -52,24 +52,10 @@ export class UserForm extends Component {
     //     });
     // }
 
-    // nextStepPG = () =>{
-    //     const { step } = this.state;
-    //     this.setState({
-    //         step: step + 7
-    //     });
-    // }
-
     // prevStepEHG = () =>{
     //     const { step } = this.state;
     //     this.setState({
     //         step: step - 3
-    //     });
-    // }
-
-    // prevStepPG = () =>{
-    //     const { step } = this.state;
-    //     this.setState({
-    //         step: step - 7
     //     });
     // }
 

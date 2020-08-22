@@ -32,7 +32,7 @@ back = e => {
                         <React.Fragment>
                             <AppBar title="Proximity Grant Eligibility"/>
                                 <List>
-                                    <ListItem primaryText="Please choose you maritial status"/>
+                                    <ListItem primaryText="Please choose your maritial status"/>
                                         <Button className={styles.button} onClick={this.handleOpen}>
                                             Selection: 
                                         </Button>
@@ -51,10 +51,10 @@ back = e => {
                                             <MenuItem value="">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={1}>Single</MenuItem>
-                                            <MenuItem value={2}>Married</MenuItem>
-                                            <MenuItem value={3}>Engaged</MenuItem>
-                                            <MenuItem value={4}>Divorced</MenuItem>
+                                            <MenuItem value="Single haha forever alone loser :,( ">Single</MenuItem>
+                                            <MenuItem value= "Happy wife happy life">Married</MenuItem>
+                                            <MenuItem value= "Got goal keeper doesnt mean still cannot score">Engaged</MenuItem>
+                                            <MenuItem value= "team devorce force">Divorced</MenuItem>
                                             </Select>
                                         </FormControl>
                                         <ListItem primaryText="What's your total income ceiling?(include extend family members if needed): "/>
