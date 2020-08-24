@@ -4,15 +4,17 @@ import AppBar from 'material-ui/AppBar';
 import { List,ListItem } from 'material-ui/List';
 import RaisedButton from  'material-ui/RaisedButton'
 
-export class FGResults extends Component {
+export class PGResults extends Component {
 
     backToHome = e =>{
         e.preventDefault();
-        this.props.backToHome();
+        this.props.backToHomePG();
     }
 
     render() {
+
         const { values:{grantMonies, otherQualifiedGrants} } = this.props;
+
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -38,10 +40,11 @@ export class FGResults extends Component {
         )
     }
 }
+
 const styles = {
     button: {
         margin: 15
     }
 }
 
-export default FGResults
+export default PGResults

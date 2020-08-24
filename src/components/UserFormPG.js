@@ -1,13 +1,20 @@
 import React, { Component } from 'react'
 import PGPersonalDetails from './PGPersonalDetails'
 import PGConfirm from './PGConfirm';
+import PGResults from './PGResults'
 
 
 export class UserFormPG extends Component {
 
     state={
         step: 1,
-        maritialStatus: null
+        maritialStatus: null,
+        firstLocation: null,
+        secondLocation: null,
+        grantMonies: '$1,000,000',
+        otherQualifiedGrants: 'Proximity Grant Scheme',
+        open:false,
+        setOpen:false
     }
 
     nextStepPG = () =>{
@@ -21,6 +28,16 @@ export class UserFormPG extends Component {
         this.setState({
             step: step - 1
         });
+    }
+
+    backToHomePG = () =>{
+        const { step } = this.state;
+        this.setState({
+            step: step/step,
+            maritialStatus: null,
+            firstLocation: null,
+            secondLocation: null,
+        })
     }
 
     handleChange = input => e => {
@@ -37,8 +54,8 @@ export class UserFormPG extends Component {
 
     render() {
         const { step } = this.state;
-        const { maritialStatus } = this.state;
-        const values = { maritialStatus };
+        const { maritialStatus,firstLocation,secondLocation,grantMonies,otherQualifiedGrants } = this.state;
+        const values = { maritialStatus,firstLocation,secondLocation,grantMonies,otherQualifiedGrants };
 
         switch(step){
             default:
@@ -55,6 +72,13 @@ export class UserFormPG extends Component {
                     nextStepPG={this.nextStepPG}
                     prevStepPG={this.prevStepPG}
                     handleChange={this.handleChange}
+                    values={values}
+                    />
+                )
+            case 3:
+                return(
+                    <PGResults
+                    backToHomePG={this.backToHomePG}
                     values={values}
                     />
                 )

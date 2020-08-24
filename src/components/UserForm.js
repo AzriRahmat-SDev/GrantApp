@@ -14,7 +14,9 @@ export class UserForm extends Component {
         lease: null,
         typeOfFlat: '',
         familyNucleus: null,
-        financialStatus: null
+        financialStatus: null,
+        grantMonies: "$1,000,000",
+        otherQualifiedGrants: 'Proximity Grant Scheme',
     }
 
     nextStep = () => {
@@ -42,6 +44,8 @@ export class UserForm extends Component {
             typeOfFlat:'',
             familyNucleus: 0,
             financialStatus: 0,
+            grantMonies: 100000,
+            otherQualifiedGrants: 'Proximity Grant Scheme',
         })
     }
 
@@ -73,8 +77,8 @@ export class UserForm extends Component {
 
     render() {
         const { step } = this.state;
-        const { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus } = this.state;
-        const values = { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus, financialStatus };
+        const { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus,grantMonies,otherQualifiedGrants } = this.state;
+        const values = { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus, financialStatus, grantMonies,otherQualifiedGrants };
 
         switch(step){
             default:

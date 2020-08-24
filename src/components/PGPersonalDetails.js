@@ -8,14 +8,10 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { List,ListItem } from 'material-ui/List';
 import RaisedButton from  'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 export class PGPersonalDetails extends Component {
 
-  state={
-    step: this.props.state + 6,
-    open:false,
-    setOpen:false,
-}
 continue = e => {
     e.preventDefault();
     this.props.nextStepPG();
@@ -33,66 +29,50 @@ back = e => {
                             <AppBar title="Proximity Grant Eligibility"/>
                                 <List>
                                     <ListItem primaryText="Please choose your maritial status"/>
-                                        <Button className={styles.button} onClick={this.handleOpen}>
-                                            Selection: 
-                                        </Button>
-                                        <FormControl className={styles.formControl}>
-                                            <InputLabel id="maritial-status"></InputLabel>
-                                            <Select
-                                            labelId="maritial-status-open-select-label"
-                                            id="maritial-status"
-                                            open={this.open}
-                                            onClose={this.handleClose}
-                                            onOpen={this.handleOpen}
-                                            value={values.maritialStatus}
-                                            onChange={handleChange('maritialStatus')}
-                                            >
-                                            <br/>
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem value="Single haha forever alone loser :,( ">Single</MenuItem>
-                                            <MenuItem value= "Happy wife happy life">Married</MenuItem>
-                                            <MenuItem value= "Got goal keeper doesnt mean still cannot score">Engaged</MenuItem>
-                                            <MenuItem value= "team devorce force">Divorced</MenuItem>
-                                            </Select>
-                                        </FormControl>
-                                        <ListItem primaryText="What's your total income ceiling?(include extend family members if needed): "/>
-                                        <Button className={styles.button} onClick={this.handleOpen}>
-                                            Selection: 
-                                        </Button>
-                                        <FormControl className={styles.formControl}>
-                                            <InputLabel id="financial-status"></InputLabel>
-                                            <Select
-                                            labelId="financial-status-open-select-label"
-                                            id="financial-status"
-                                            open={this.open}
-                                            onClose={this.handleClose}
-                                            onOpen={this.handleOpen}
-                                            value={values.financialStatus}
-                                            onChange={handleChange('financialStatus')}
-                                            >
-                                            <br/>
-                                            <MenuItem value="">
-                                                <em>None</em>
-                                            </MenuItem>
-                                            <MenuItem value={1}>Below or equals to $14000 per month</MenuItem>
-                                            <MenuItem value={2}>Between $14000 to $21000 per month</MenuItem>
-                                            <MenuItem value={3}>Above $21000 per month</MenuItem>
-                                            </Select>
-                                        </FormControl>
+                                    <Button className={styles.button} onClick={this.handleOpen}>
+                                        Selection: 
+                                    </Button>
+                                    <FormControl className={styles.formControl}>
+                                        <InputLabel id="maritial-status"></InputLabel>
+                                        <Select
+                                        labelId="maritial-status-open-select-label"
+                                        id="maritial-status"
+                                        open={this.props.open}
+                                        onClose={this.handleClose}
+                                        onOpen={this.handleOpen}
+                                        value={values.maritialStatus}
+                                        onChange={handleChange('maritialStatus')}
+                                        >
+                                        <br/>
+                                        <MenuItem value="">
+                                            <em>None</em>
+                                        </MenuItem>
+                                        <MenuItem value="Single haha forever alone loser :,( ">Single</MenuItem>
+                                        <MenuItem value= "Happy wife happy life">Married</MenuItem>
+                                        <MenuItem value= "Got goal keeper doesnt mean still cannot score">Engaged</MenuItem>
+                                        <MenuItem value= "team devorce force">Divorced</MenuItem>
+                                        </Select>
+                                    </FormControl>
+                                    <ListItem primaryText="Please enter the postalcode of the intended purchased DBSS flat"/>
+                                        <TextField
+                                            hintText = "Enter postal code here I.e: Sxxxxxx"
+                                            floatingLabelFixed='firstLocation'
+                                            onChange={handleChange('firstLocation')}
+                                            defaultValue={values.firstLocation}
+                                        />
+                                    <ListItem primaryText="Please enter the postalcode of your parents or childs place of residence"/>
+                                        <TextField
+                                            hintText = "Enter postal code here I.e: Sxxxxxx"
+                                            floatingLabelFixed='secondLocation'
+                                            onChange={handleChange('secondLocation')}
+                                            defaultValue={values.secondLocation}
+                                        />             
                                 </List>
                                 <RaisedButton
                                     label="Continue"
                                     primary={true}
                                     style={styles.button}
                                     onClick={this.continue}
-                                />
-                                <RaisedButton
-                                    label="Back"
-                                    primary={false}
-                                    style={styles.button}
-                                    onClick={this.back}
                                 />
                             </React.Fragment>
                         </MuiThemeProvider>

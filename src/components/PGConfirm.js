@@ -17,7 +17,7 @@ export class PGConfirm extends Component {
     };
 
     render() {
-        const { values:{maritialStatus} } = this.props;
+        const { values:{maritialStatus, firstLocation, secondLocation} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -28,8 +28,12 @@ export class PGConfirm extends Component {
                             secondaryText = { maritialStatus }
                         />
                         <ListItem
-                            primaryText = "Test test"
-                            // secondaryText = {  }
+                            primaryText = "Postalcode of intended purchased DBSS flat"
+                            secondaryText = { firstLocation }
+                        />
+                        <ListItem
+                            primaryText = "Postalcode of your parents or childs place of residence"
+                            secondaryText = { secondLocation }
                         />
                     </List>
                     <RaisedButton
