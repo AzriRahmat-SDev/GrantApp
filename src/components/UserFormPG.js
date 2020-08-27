@@ -14,7 +14,7 @@ export class UserFormPG extends Component {
         grantMonies: '$1,000,000',
         otherQualifiedGrants: 'Proximity Grant Scheme',
         open:false,
-        setOpen:false
+        setOpen:false,
     }
 
     nextStepPG = () =>{

@@ -3,9 +3,10 @@ import './App.css';
 import Navigation from './components/Navigation';
 import UserForm from './components/UserForm';
 import UserFormPG from './components/UserFormPG';
+import UserFormEHG from './components/UserFormEHG';
 import HomePage from './components/HomePage';
-import EHGPersonalDetails from './components/EHGPersonalDetails';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 
 
 
@@ -19,7 +20,7 @@ function App() {
         <Route exact path="/GrantApp" component={HomePage}/>
         <Route exact path="/HomePage" component={HomePage}/>
         <Route exact path="/FGPersonalDetails" component={UserForm}/>
-        <Route exact path="/EHGPersonalDetails" component={EHGPersonalDetails}/>
+        <Route exact path="/EHGPersonalDetails" component={UserFormEHG}/>
         <Route exact path="/PGPersonalDetails" component={UserFormPG}/>
       </div>
       </Switch>
