@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import EHGPersonalDetails from './EHGPersonalDetails'
+import EHGConfirm from './EHGConfirm'
+import EHGResults from './EHGResults'
 
 
 
@@ -10,8 +12,9 @@ export class UserFormEHG extends Component {
         maritialStatus: null,
         currentAge: null,
         lease: null,
-        firstTimeBuyers: null,
+        firstTimeBuyers: 'Yes',
         employmentStatus: null,
+        income: null,
         grantMonies: '$1,000,000',
         otherQualifiedGrants: 'Proximity Grant Scheme',
         open:false,
@@ -40,6 +43,7 @@ export class UserFormEHG extends Component {
             lease: null,
             firstTimeBuyers: null,
             employmentStatus: null,
+            income: null
         })
     }
 
@@ -57,34 +61,34 @@ export class UserFormEHG extends Component {
 
     render() {
         const { step } = this.state;
-        const { maritialStatus,currentAge,lease,firsrtTimeBuyers,grantMonies,otherQualifiedGrants } = this.state;
-        const values = { maritialStatus,currentAge,lease,firsrtTimeBuyers,grantMonies,otherQualifiedGrants };
+        const { maritialStatus,currentAge,lease,firstTimeBuyers,grantMonies,otherQualifiedGrants,income } = this.state;
+        const values = { maritialStatus,currentAge,lease,firstTimeBuyers,grantMonies,otherQualifiedGrants,income };
 
         switch(step){
             default:
                 return(
                     <EHGPersonalDetails 
-                    nextStepPG={this.nextStepPG}
+                    nextStepEHG={this.nextStepEHG}
                     handleChange={this.handleChange}
                     values={values}
                     />
                 )
-            // case 2:
-            //     return(
-            //         <EHGConfirm
-            //         nextStepPG={this.nextStepPG}
-            //         prevStepPG={this.prevStepPG}
-            //         handleChange={this.handleChange}
-            //         values={values}
-            //         />
-            //     )
-            // case 3:
-            //     return(
-            //         <EHGResults
-            //         backToHomePG={this.backToHomePG}
-            //         values={values}
-            //         />
-            //     )
+            case 2:
+                return(
+                    <EHGConfirm
+                    nextStepEHG={this.nextStepEHG}
+                    prevStepEHG={this.prevStepEHG}
+                    handleChange={this.handleChange}
+                    values={values}
+                    />
+                )
+            case 3:
+                return(
+                    <EHGResults
+                    backToHomeEHG={this.backToHomeEHG}
+                    values={values}
+                    />
+                )
 
         }
     }

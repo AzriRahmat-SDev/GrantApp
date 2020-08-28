@@ -74,9 +74,9 @@ export class EHGPersonalDetails extends Component {
                                 defaultValue={values.currentAge}
                               />
                           <ListItem
-                            primaryText="Remaining Lease of Flat?"/>
+                            primaryText="Remaining lease of flat?"/>
                             <TextField 
-                                hintText = "Enter the remaining lease of flat"
+                                hintText = "Enter remaining lease here"
                                 floatingLabelFixed='lease'
                                 onChange={handleChange('lease')}
                                 defaultValue={values.lease}
@@ -91,7 +91,15 @@ export class EHGPersonalDetails extends Component {
                                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                                     <FormControlLabel value="No" control={<Radio />} label="No" />
                                 </RadioGroup>
-                            </FormControl>            
+                            </FormControl> 
+                          <ListItem
+                            primaryText="What is the average gross monthly household income for the past 12 months"/>
+                            <TextField 
+                                hintText = "Enter average income here"
+                                floatingLabelFixed='income'
+                                onChange={handleChange('income')}
+                                defaultValue={values.income}
+                              />           
                       </List>
                       <RaisedButton
                           label="Continue"
