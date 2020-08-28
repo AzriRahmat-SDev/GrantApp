@@ -26,7 +26,7 @@ back = e => {
                 return (
                     <MuiThemeProvider>
                         <React.Fragment>
-                            <AppBar title="Proximity Grant Eligibility"/>
+                            <AppBar title="Proximity Housing Grant (PHG) Eligibility"/>
                                 <List>
                                     <ListItem primaryText="Please choose your maritial status"/>
                                     <Button className={styles.button} onClick={this.handleOpen}>

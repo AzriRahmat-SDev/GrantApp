@@ -30,7 +30,7 @@ export class EHGPersonalDetails extends Component {
         return (
           <MuiThemeProvider>
               <React.Fragment>
-                  <AppBar title="Enhance Housing Grant Eligibility"/>
+                  <AppBar title="Enhance Housing Grant (EHG) Eligibility For Families And Singles"/>
                       <List>
                           <ListItem primaryText="Please choose your family nucleus"/>
                           <Button className={styles.button} onClick={this.handleOpen}>
