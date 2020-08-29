@@ -51,7 +51,7 @@ export class EHGPersonalDetails extends Component {
                               <MenuItem value="">
                                   <em>None</em>
                               </MenuItem>
-                              <MenuItem value="Singles">Single (Singles livng with parents, ST and FT cpuple or an Orphan)</MenuItem>
+                              <MenuItem value="Singles">Single (Singles livng with parents, ST and FT couple or an Orphan)</MenuItem>
                               <MenuItem value= "Married">Married (Married, married with kids or married and living with parents)</MenuItem>
                               </Select>
                           </FormControl>

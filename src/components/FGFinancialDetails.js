@@ -51,10 +51,10 @@ export class FGFinancialDetails extends Component {
                                             <MenuItem value= {1}>
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={1}>Spouse and children(if any)</MenuItem>
-                                            <MenuItem value={2}>Children under legal custody</MenuItem>
-                                            <MenuItem value={3}>Newlyweds</MenuItem>
-                                            <MenuItem value={4}>Soon to be spouse</MenuItem>
+                                            <MenuItem value="Spouse and children(if any)">Spouse and children(if any)</MenuItem>
+                                            <MenuItem value="Having Children under legal custody">You have children under legal custody</MenuItem>
+                                            <MenuItem value="Married">Married</MenuItem>
+                                            <MenuItem value="Engaged">Engaged</MenuItem>
                                             </Select>
                                         </FormControl>
                                         <ListItem primaryText="What's your total income ceiling?(include extend family members if needed): "/>
@@ -76,9 +76,9 @@ export class FGFinancialDetails extends Component {
                                             <MenuItem value="">
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value={1}>Below or equals to $14000 per month</MenuItem>
-                                            <MenuItem value={2}>Between $14000 to $21000 per month</MenuItem>
-                                            <MenuItem value={3}>Above $21000 per month</MenuItem>
+                                            <MenuItem value= "Below or equals to $14000 per month">Below or equals to $14000 per month</MenuItem>
+                                            <MenuItem value= "Between $14000 to $21000 per month">Between $14000 to $21000 per month</MenuItem>
+                                            <MenuItem value= "Above $21000 per month">Above $21000 per month</MenuItem>
                                             </Select>
                                         </FormControl>
                                 </List>

@@ -12,7 +12,7 @@ export class UserForm extends Component {
         currentAge: null,
         firstTimeBuyers: '',
         lease: null,
-        typeOfFlat: '',
+        typeOfFlat: 0,
         familyNucleus: null,
         financialStatus: null,
         grantMonies: "$1,000,000",
@@ -48,20 +48,6 @@ export class UserForm extends Component {
             otherQualifiedGrants: 'Proximity Grant Scheme',
         })
     }
-
-    // nextStepEHG = () =>{
-    //     const { step } = this.state;
-    //     this.setState({
-    //         step: step + 3
-    //     });
-    // }
-
-    // prevStepEHG = () =>{
-    //     const { step } = this.state;
-    //     this.setState({
-    //         step: step - 3
-    //     });
-    // }
 
     handleChange = input => e => {
         this.setState({[input]: e.target.value});

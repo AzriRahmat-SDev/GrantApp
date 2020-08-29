@@ -17,19 +17,39 @@ export class FGConfirm extends Component {
     };
 
     render() {
-        const { values:{currentAge, lease} } = this.props;
+        const { values:{citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title = "Confirmation"/>
                     <List>
                         <ListItem
+                            primaryText = "The Combination Of Your Citizenships Are"
+                            secondaryText = { citizenship }
+                        />
+                        <ListItem
                             primaryText = "Your Age"
-                            secondaryText = { currentAge }
+                            secondaryText = { currentAge + " years old"}
+                        />
+                        <ListItem
+                            primaryText = "Are You First Time Buyer?"
+                            secondaryText = { firstTimeBuyers }
                         />
                         <ListItem
                             primaryText = "Remaining Lease of Flat"
                             secondaryText = { lease }
+                        />
+                        <ListItem
+                            primaryText = "The Type Of Flat That You Have Selected Is"
+                            secondaryText = { typeOfFlat }
+                        />
+                        <ListItem
+                            primaryText = "Your Family Nucleus"
+                            secondaryText = { familyNucleus }
+                        />
+                        <ListItem
+                            primaryText = "Your Combined Household Monthly Income is"
+                            secondaryText = { financialStatus }
                         />
                     </List>
                     <RaisedButton

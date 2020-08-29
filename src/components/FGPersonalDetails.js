@@ -33,12 +33,12 @@ export class FGPersonalDetails extends Component {
                             <FormControl component="fieldset">
                                 <RadioGroup aria-label="citizenship" 
                                     name="citizenship" 
-                                    value={this.state} 
-                                    onChange={this.handleCheck} 
-                                    defaultValue={values}>
-                                        <FormControlLabel value="SCSC" control={<Radio />} label="Singapore Citizen + Singapore Citizen" />
-                                        <FormControlLabel value="SCSPR" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
-                                        <FormControlLabel value="Other" control={<Radio />} label="Others" />
+                                    value={this.citizenship} 
+                                    onChange={handleChange('citizenship')} 
+                                    defaultValue={values.citizenship}>
+                                        <FormControlLabel value="Both Singaporean citizens" control={<Radio />} label="Singaporean Citizen + Singaporean Citizen" />
+                                        <FormControlLabel value="One Singaporean with a Singaporean permanent resident" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
+                                        <FormControlLabel value="Others" control={<Radio />} label="Others" />
                                 </RadioGroup>
                             </FormControl>
                         <ListItem primaryText="Enter Your Current Age"/>
@@ -52,11 +52,11 @@ export class FGPersonalDetails extends Component {
                             <FormControl component="fieldset">
                                     <RadioGroup aria-label="firstTimeBuyers" 
                                     name="firstTimeBuyer" 
-                                    value={values.firsTimeBuyer} 
-                                    onChange={handleChange('firstTimeBuyer')} //unable to capture the response but and pressthe button
-                                    defaultValue={values.firsTimeBuyer}>
-                                    <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                                    <FormControlLabel value="no" control={<Radio />} label="No" />
+                                    value={values.firsTimeBuyers} 
+                                    onChange={handleChange('firstTimeBuyers')} //unable to capture the response but and pressthe button
+                                    defaultValue={values.firsTimeBuyers}>
+                                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                                    <FormControlLabel value="No" control={<Radio />} label="No" />
                                 </RadioGroup>
                             </FormControl>
                         <ListItem
@@ -72,11 +72,11 @@ export class FGPersonalDetails extends Component {
                             <FormControl component="fieldset">
                                     <RadioGroup aria-label="typeOfFlat" 
                                     name="typeOfFlat" 
-                                    value={this.state} 
-                                    onChange={this.handleCheck} 
-                                    defaultValue={values}>
-                                    <FormControlLabel value=">2 || <4" control={<Radio />} label="2 to 4 Room Resale Flat" />
-                                    <FormControlLabel value="=> 5" control={<Radio />} label="5 Room or Bigger Resale Flat" />
+                                    value={values.typeOfFlat} 
+                                    onChange={handleChange('typeOfFlat')} 
+                                    defaultValue={values.typeOfFlat}>
+                                    <FormControlLabel value="2 to 4 room resale flat" control={<Radio />} label="2 to 4 Room Resale Flat" />
+                                    <FormControlLabel value="5 Room or bigger resale flat" control={<Radio />} label="5 Room or Bigger Resale Flat" />
                                 </RadioGroup>
                             </FormControl>
                     </List>
