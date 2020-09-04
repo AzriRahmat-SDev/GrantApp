@@ -58,7 +58,7 @@ export class FGPersonalDetails extends Component {
                             </FormControl>
                     {/* End of Citizenship Section */}
 
-                    {/* Start of Citizenship section */}
+                    {/* Start of Family Nucleus section */}
                         <ListItem primaryText="Please Choose Your Family Nucleus"/>
                                 <Button className={styles.button} onClick={this.handleOpen}>
                                     Option: 
@@ -78,17 +78,14 @@ export class FGPersonalDetails extends Component {
                                 <MenuItem value= {1}>
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value="Singles Grant">Single Orphan With Unmarried Siblings</MenuItem>
-                                <MenuItem value="Family Grant">Married Couple</MenuItem>
-                                <MenuItem value="Singles Grant">Child living with parents</MenuItem>
-                                <MenuItem value="Family Grant">Fiancé/Fiancée couple</MenuItem>
-                                <MenuItem value="Family Grant">Widowed/Divorce with children under legal custody </MenuItem>
+                                <MenuItem value="Singles Grant">Single Orphan With Unmarried Siblings OR Child living with parents</MenuItem>
+                                <MenuItem value="Family Grant">Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody</MenuItem>
                                 </Select>
                             </FormControl>
-                    {/* End of Citizenship section */}
+                    {/* End of Family Nucleus section */}
 
                     {/* Start of Prev Housing subsidy section */}
-                        <ListItem primaryText="Recipient Of Pevious Housing Subsidies"/>
+                        <ListItem primaryText="Recipient Of Previous Housing Subsidies"/>
                                 <Button className={styles.button} onClick={this.handleOpen}>
                                     Option: 
                                 </Button>
@@ -148,6 +145,7 @@ const styles = {
 export default FGPersonalDetails;
 
 
+// eslint-disable-next-line no-lone-blocks
 {/* <ListItem
     primaryText="Remaining Lease Of Flat?"
     />

@@ -16,14 +16,14 @@ export class FGConfirm extends Component {
     };
 
     render() {
-        const { values:{citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus} } = this.props;
+        const { values:{citizenship, currentAge, firstTimeBuyers, typeOfFlat, familyNucleus} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title = "Confirmation"/>
                     <List>
                         <ListItem
-                            primaryText = "The Combination Of Your Citizenships Are"
+                            primaryText = "The Combination Of Your Citizenship Are"
                             secondaryText = { citizenship }
                         />
                         <ListItem
@@ -35,15 +35,11 @@ export class FGConfirm extends Component {
                             secondaryText = { firstTimeBuyers }
                         />
                         <ListItem
-                            primaryText = "Remaining Lease of Flat"
-                            secondaryText = { lease }
-                        />
-                        <ListItem
                             primaryText = "The Type Of Flat That You Have Selected Is"
                             secondaryText = { typeOfFlat }
                         />
                         <ListItem
-                            primaryText = "Based On Your Family Nucleus You Will Be Categorise Under"
+                            primaryText = "Based On Your Family Nucleus You Will Be Categorized Under"
                             secondaryText = { familyNucleus }
                         />
                     </List>

@@ -23,7 +23,7 @@ export class UserForm extends Component {
         this.setState({
             step: step + 1
         });
-        this.isSingle()
+        this.toCalculate()
     }
 
     prevStep = () => {
@@ -45,33 +45,128 @@ export class UserForm extends Component {
             familyNucleus: '',
             financialStatus: null,
             grantMonies: '',
-            otherQualifiedGrants: 'Proximity Grant Scheme',
+            otherQualifiedGrants: 'Proximity Grant Scheme'
         })
     }
 
-    isSingle = () =>{
+    toCalculate = () =>{
         if(
-        this.state.citizenship.includes('Other') &&
-        this.state.currentAge >= 35 &&
-        this.state.firstTimeBuyers.includes('All First-Timers') &&
-        this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
-        this.state.familyNucleus.includes('Singles Grant')
+            this.state.citizenship.includes('Other') &&
+            this.state.currentAge >= 35 &&
+            this.state.firstTimeBuyers.includes('All First-Timers') &&
+            this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
+            this.state.familyNucleus.includes('Singles Grant')
         )
         {
             this.setState({grantMonies: '$25,000'})
             return true;
         }
         else if (
-        this.state.citizenship.includes('Other') &&
-        this.state.currentAge >= 35 &&
-        this.state.firstTimeBuyers.includes('All First-Timers') &&
-        this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
-        this.state.familyNucleus.includes('Singles Grant')
+            this.state.citizenship.includes('Other') &&
+            this.state.currentAge >= 35 &&
+            this.state.firstTimeBuyers.includes('All First-Timers') &&
+            this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
+            this.state.familyNucleus.includes('Singles Grant')
         )
         {
             this.setState({grantMonies: '$20,000'})
             return true;
         }
+        else if (
+            this.state.citizenship.includes('Both Are Singaporean citizens') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('All First-Timers') &&
+            this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({grantMonies: '$50,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('Both Are Singaporean citizens') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('All First-Timers') &&
+            this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({grantMonies: '$40,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('One Singaporean with a Singaporean permanent resident') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('All First-Timers') &&
+            this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            // this.setState({familyNucleus: 'Half-Family Grant'});
+            this.setState({grantMonies: '$40,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('One Singaporean with a Singaporean permanent resident') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('All First-Timers') &&
+            this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({familyNucleus: 'Half-Family Grant'});
+            this.setState({grantMonies: '$30,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('Both Are Singaporean citizens') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
+            this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({familyNucleus: 'Half-Family Grant'});
+            this.setState({grantMonies: '$25,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('Both Are Singaporean citizens') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
+            this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({familyNucleus: 'Half-Family Grant'});
+            this.setState({grantMonies: '$20,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('One Singaporean with a Singaporean permanent resident') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
+            this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({familyNucleus: 'Half-Family Grant'});
+            this.setState({grantMonies: '$20,000'})
+            return true;
+        }
+        else if (
+            this.state.citizenship.includes('One Singaporean with a Singaporean permanent resident') &&
+            this.state.currentAge >=21 &&
+            this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
+            this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
+            this.state.familyNucleus.includes('Family Grant')
+        )
+        {
+            this.setState({familyNucleus: 'Half-Family Grant'});
+            this.setState({grantMonies: '$15,000'})
+            return true;
+        }
+        
         else{
             this.setState({grantMonies: 'Sorry, You Did Not Qualify For Any CPF Housing Grant'})
             return true;
