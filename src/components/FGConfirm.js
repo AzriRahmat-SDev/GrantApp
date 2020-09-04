@@ -8,7 +8,6 @@ export class FGConfirm extends Component {
 
     continue = e => {
         e.preventDefault();
-        //Process form here (data sent to back end api)
         this.props.nextStep();
     };
     back = e => {
@@ -17,7 +16,7 @@ export class FGConfirm extends Component {
     };
 
     render() {
-        const { values:{citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus} } = this.props;
+        const { values:{citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -29,7 +28,7 @@ export class FGConfirm extends Component {
                         />
                         <ListItem
                             primaryText = "Your Age"
-                            secondaryText = { currentAge + " years old"}
+                            secondaryText = { "You're " + currentAge + " years old"}
                         />
                         <ListItem
                             primaryText = "Are You First Time Buyer?"
@@ -44,12 +43,8 @@ export class FGConfirm extends Component {
                             secondaryText = { typeOfFlat }
                         />
                         <ListItem
-                            primaryText = "Your Family Nucleus"
+                            primaryText = "Based On Your Family Nucleus You Will Be Categorise Under"
                             secondaryText = { familyNucleus }
-                        />
-                        <ListItem
-                            primaryText = "Your Combined Household Monthly Income is"
-                            secondaryText = { financialStatus }
                         />
                     </List>
                     <RaisedButton

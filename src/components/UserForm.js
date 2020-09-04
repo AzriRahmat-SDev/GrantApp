@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import FGPersonalDetails from './FGPersonalDetails'
-import FGFinancialDetails from './FGFinancialDetails'
 import FGConfirm from './FGConfirm'
 import FGResults from './FGResults'
 
@@ -13,9 +12,9 @@ export class UserForm extends Component {
         firstTimeBuyers: '',
         lease: null,
         typeOfFlat: '',
-        familyNucleus: null,
+        familyNucleus: '',
         financialStatus: null,
-        grantMonies: "$1,000,000",
+        grantMonies: '$1,000,000',
         otherQualifiedGrants: 'Proximity Grant Scheme',
     }
 
@@ -24,6 +23,7 @@ export class UserForm extends Component {
         this.setState({
             step: step + 1
         });
+        this.isSingle()
     }
 
     prevStep = () => {
@@ -42,11 +42,40 @@ export class UserForm extends Component {
             firstTimeBuyers: '',
             lease:'',
             typeOfFlat:'',
-            familyNucleus: null,
+            familyNucleus: '',
             financialStatus: null,
-            grantMonies: 100000,
+            grantMonies: '',
             otherQualifiedGrants: 'Proximity Grant Scheme',
         })
+    }
+
+    isSingle = () =>{
+        if(
+        this.state.citizenship.includes('Other') &&
+        this.state.currentAge >= 35 &&
+        this.state.firstTimeBuyers.includes('All First-Timers') &&
+        this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
+        this.state.familyNucleus.includes('Singles Grant')
+        )
+        {
+            this.setState({grantMonies: '$25,000'})
+            return true;
+        }
+        else if (
+        this.state.citizenship.includes('Other') &&
+        this.state.currentAge >= 35 &&
+        this.state.firstTimeBuyers.includes('All First-Timers') &&
+        this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
+        this.state.familyNucleus.includes('Singles Grant')
+        )
+        {
+            this.setState({grantMonies: '$20,000'})
+            return true;
+        }
+        else{
+            this.setState({grantMonies: 'Sorry, You Did Not Qualify For Any CPF Housing Grant'})
+            return true;
+        }
     }
 
     handleChange = input => e => {
@@ -72,21 +101,12 @@ export class UserForm extends Component {
                     <FGPersonalDetails
                     nextStep={this.nextStep}
                     handleChange={this.handleChange}
-                    values={values}
-                    />
-                );
-            case 2:
-                return(
-                    <FGFinancialDetails
-                    nextStep={this.nextStep}
-                    prevStep={this.prevStep}
-                    handleChange={this.handleChange}
                     handleClose={this.handleClose}
                     handleOpen={this.handleOpen}
                     values={values}
                     />
                 );
-            case 3:
+            case 2:
                 return(
                     <FGConfirm
                     nextStep={this.nextStep}
@@ -94,7 +114,7 @@ export class UserForm extends Component {
                     values={values}
                     />
                 );
-            case 4:
+            case 3:
                 return(
                     <FGResults
                     backToHome={this.backToHome}

@@ -10,6 +10,10 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 // import FormLabel from '@material-ui/core/FormLabel'
 import TextField from 'material-ui/TextField';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 export class FGPersonalDetails extends Component {
 
@@ -29,18 +33,7 @@ export class FGPersonalDetails extends Component {
                 <React.Fragment>
                     <AppBar title="CPF Housing Grant Eligibility"/>
                     <List> 
-                        <ListItem primaryText="Enter Your Citizenship"/>
-                            <FormControl component="fieldset">
-                                <RadioGroup aria-label="citizenship" 
-                                    name="citizenship" 
-                                    value={this.citizenship} 
-                                    onChange={handleChange('citizenship')} 
-                                    defaultValue={values.citizenship}>
-                                        <FormControlLabel value="Both Singaporean citizens" control={<Radio />} label="Singaporean Citizen + Singaporean Citizen" />
-                                        <FormControlLabel value="One Singaporean with a Singaporean permanent resident" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
-                                        <FormControlLabel value="Others" control={<Radio />} label="Others" />
-                                </RadioGroup>
-                            </FormControl>
+                    {/* Start of Age section */}
                         <ListItem primaryText="Enter Your Current Age"/>
                             <TextField
                                 hintText = "Enter Your Current Age Here"
@@ -48,29 +41,82 @@ export class FGPersonalDetails extends Component {
                                 onChange={handleChange('currentAge')}
                                 defaultValue={values.currentAge}
                                 />
-                        <ListItem primaryText="Are You A First Time Buyer?"/>
+                    {/* End of Age Section */}
+
+                    {/* Start of Citizenship section */}
+                        <ListItem primaryText="Enter Your Citizenship"/>
                             <FormControl component="fieldset">
-                                    <RadioGroup aria-label="firstTimeBuyers" 
-                                    name="firstTimeBuyer" 
-                                    value={values.firsTimeBuyers} 
-                                    onChange={handleChange('firstTimeBuyers')} //unable to capture the response but and pressthe button
-                                    defaultValue={values.firsTimeBuyers}>
-                                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                                <RadioGroup aria-label="citizenship" 
+                                    name="citizenship" 
+                                    value={this.citizenship} 
+                                    onChange={handleChange('citizenship')} 
+                                    defaultValue={values.citizenship}>
+                                        <FormControlLabel value="Both Are Singaporean citizens" control={<Radio />} label="Singaporean Citizen + Singaporean Citizen" />
+                                        <FormControlLabel value="One Singaporean with a Singaporean permanent resident" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
+                                        <FormControlLabel value="Others" control={<Radio />} label="Other" />
                                 </RadioGroup>
                             </FormControl>
-                        <ListItem
-                            primaryText="Remaining Lease of Flat?"
-                            />
-                            <TextField 
-                                hintText = "Enter The Remaining Lease of Flat"
-                                floatingLabelFixed='lease'
-                                onChange={handleChange('lease')}
-                                defaultValue={values.lease}
-                            />
-                        <ListItem primaryText="Type of Flat (Number of Rooms)"/>
+                    {/* End of Citizenship Section */}
+
+                    {/* Start of Citizenship section */}
+                        <ListItem primaryText="Please Choose Your Family Nucleus"/>
+                                <Button className={styles.button} onClick={this.handleOpen}>
+                                    Option: 
+                                </Button>
+                            <FormControl className={styles.formControl}>
+                                <InputLabel id="family-nucleus"></InputLabel>
+                                <Select
+                                labelId="family-nucleus-open-select-label"
+                                id="family-nucleus"
+                                open={this.open}
+                                onClose={this.handleClose}
+                                onOpen={this.handleOpen}
+                                onChange={handleChange('familyNucleus')}
+                                value={values.familyNucleus}
+                                >
+                                <br/>
+                                <MenuItem value= {1}>
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="Singles Grant">Single Orphan With Unmarried Siblings</MenuItem>
+                                <MenuItem value="Family Grant">Married Couple</MenuItem>
+                                <MenuItem value="Singles Grant">Child living with parents</MenuItem>
+                                <MenuItem value="Family Grant">Fiancé/Fiancée couple</MenuItem>
+                                <MenuItem value="Family Grant">Widowed/Divorce with children under legal custody </MenuItem>
+                                </Select>
+                            </FormControl>
+                    {/* End of Citizenship section */}
+
+                    {/* Start of Prev Housing subsidy section */}
+                        <ListItem primaryText="Recipient Of Pevious Housing Subsidies"/>
+                                <Button className={styles.button} onClick={this.handleOpen}>
+                                    Option: 
+                                </Button>
+                            <FormControl className={styles.formControl}>
+                                <InputLabel id="firsTimeBuyers"></InputLabel>
+                                <Select
+                                    labelId="firsTimeBuyers-open-select-label"
+                                    id="firsTimeBuyers"
+                                    open={this.open}
+                                    onClose={this.handleClose}
+                                    onOpen={this.handleOpen}
+                                    value={values.firstTimeBuyers}
+                                    onChange={handleChange('firstTimeBuyers')}
+                                >
+                                <br/>
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value= "All First-Timers">All Applicants Are First-Timers</MenuItem>
+                                <MenuItem value= "One First-Timer, One Second-Timer">You're A First-Timer; Your Significant Other Is Second-Timer And Has Received Only One Housing Subsidy </MenuItem>
+                                </Select>
+                            </FormControl>
+                    {/* End of Prev Housing subsidy section */}
+
+                    {/* Start of Type Of Flat Section */}
+                        <ListItem primaryText="Type Of Flat (Number of Rooms)"/>
                             <FormControl component="fieldset">
-                                    <RadioGroup aria-label="typeOfFlat" 
+                                <RadioGroup aria-label="typeOfFlat" 
                                     name="typeOfFlat" 
                                     value={values.typeOfFlat} 
                                     onChange={handleChange('typeOfFlat')} 
@@ -79,6 +125,7 @@ export class FGPersonalDetails extends Component {
                                     <FormControlLabel value="5 Room or bigger resale flat" control={<Radio />} label="5 Room or Bigger Resale Flat" />
                                 </RadioGroup>
                             </FormControl>
+                    {/* End of Type Of Flat Section */}
                     </List>
                     <RaisedButton
                         label="Continue"
@@ -99,3 +146,14 @@ const styles = {
 }
 
 export default FGPersonalDetails;
+
+
+{/* <ListItem
+    primaryText="Remaining Lease Of Flat?"
+    />
+    <TextField 
+        hintText = "Enter The Remaining Lease Of Flat"
+        floatingLabelFixed='lease'
+        onChange={handleChange('lease')}
+        defaultValue={values.lease}
+    /> */}

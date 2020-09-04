@@ -44,15 +44,17 @@ export class FGFinancialDetails extends Component {
                                             open={this.open}
                                             onClose={this.handleClose}
                                             onOpen={this.handleOpen}
-                                            value={values.familyNucleus}
                                             onChange={handleChange('familyNucleus')}
+                                            value={values.familyNucleus}
+                                            
                                             >
                                             <br/>
                                             <MenuItem value= {1}>
                                                 <em>None</em>
                                             </MenuItem>
-                                            <MenuItem value="Spouse and children(if any)">Spouse and children(if any)</MenuItem>
-                                            <MenuItem value="Having Children under legal custody">You have children under legal custody</MenuItem>
+                                            <MenuItem value="Single">Spouse and children(if any)</MenuItem>
+                                            <MenuItem value="Single">You have children under legal custody</MenuItem>
+                                            <MenuItem value="Single">Child living with parents</MenuItem>
                                             <MenuItem value="Married">Married</MenuItem>
                                             <MenuItem value="Engaged">Engaged</MenuItem>
                                             </Select>
