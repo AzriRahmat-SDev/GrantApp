@@ -53,7 +53,7 @@ export class FGPersonalDetails extends Component {
                                     defaultValue={values.citizenship}>
                                         <FormControlLabel value="Both Are Singaporean citizens" control={<Radio />} label="Singaporean Citizen + Singaporean Citizen" />
                                         <FormControlLabel value="One Singaporean with a Singaporean permanent resident" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
-                                        <FormControlLabel value="Others" control={<Radio />} label="Other" />
+                                        <FormControlLabel value="Others" control={<Radio />} label="Others" />
                                 </RadioGroup>
                             </FormControl>
                     {/* End of Citizenship Section */}
@@ -78,8 +78,8 @@ export class FGPersonalDetails extends Component {
                                 <MenuItem value= {1}>
                                     <em>None</em>
                                 </MenuItem>
-                                <MenuItem value="Singles Grant">Single Orphan With Unmarried Siblings OR Child living with parents</MenuItem>
-                                <MenuItem value="Family Grant">Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody</MenuItem>
+                                <MenuItem value="Singles Grant">Singles (Single Orphan With Unmarried Siblings OR Child living with parents)</MenuItem>
+                                <MenuItem value="Family Grant">Married (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
                                 </Select>
                             </FormControl>
                     {/* End of Family Nucleus section */}

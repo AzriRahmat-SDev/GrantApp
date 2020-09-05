@@ -24,15 +24,15 @@ export class PGConfirm extends Component {
                     <AppBar title = "Confirmation"/>
                     <List>
                         <ListItem
-                            primaryText = "Your maritial status"
+                            primaryText = "Your marital status"
                             secondaryText = { maritialStatus }
                         />
                         <ListItem
-                            primaryText = "Postalcode of intended purchased DBSS flat"
+                            primaryText = "Postal Code of intended purchased DBSS flat"
                             secondaryText = { firstLocation }
                         />
                         <ListItem
-                            primaryText = "Postalcode of your parents or childs place of residence"
+                            primaryText = "Postal Code of your parents' or child's place of residence"
                             secondaryText = { secondLocation }
                         />
                     </List>

@@ -16,6 +16,8 @@ export class UserForm extends Component {
         financialStatus: null,
         grantMonies: '$1,000,000',
         otherQualifiedGrants: 'Proximity Grant Scheme',
+        open:false,
+        setOpen:false,
     }
 
     nextStep = () => {
@@ -102,7 +104,6 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Family Grant')
         )
         {
-            // this.setState({familyNucleus: 'Half-Family Grant'});
             this.setState({grantMonies: '$40,000'})
             return true;
         }

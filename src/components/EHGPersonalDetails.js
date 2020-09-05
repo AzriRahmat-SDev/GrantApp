@@ -32,6 +32,7 @@ export class EHGPersonalDetails extends Component {
               <React.Fragment>
                   <AppBar title="Enhance Housing Grant (EHG) Eligibility For Families And Singles"/>
                       <List>
+                        {/* Start of Family nucleus section */}
                           <ListItem primaryText="Please choose your family nucleus"/>
                           <Button className={styles.button} onClick={this.handleOpen}>
                               Selection: 
@@ -51,21 +52,39 @@ export class EHGPersonalDetails extends Component {
                               <MenuItem value="">
                                   <em>None</em>
                               </MenuItem>
-                              <MenuItem value="Singles">Single (Singles livng with parents, ST and FT couple or an Orphan)</MenuItem>
-                              <MenuItem value= "Married">Married (Married, married with kids or married and living with parents)</MenuItem>
+                              <MenuItem value="EHG-Singles">Singles (Single Orphan With Unmarried Siblings OR Child living with parents)</MenuItem>
+                              <MenuItem value= "EHG-Marrieds">Married (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
                               </Select>
                           </FormControl>
-                          <ListItem primaryText="Are you a first time buyer?"/>
-                            <FormControl component="fieldset">
-                                    <RadioGroup aria-label="firstTimeBuyer" 
-                                    name="firstTimeBuyer" 
-                                    value={this.state} 
-                                    onChange={this.handleCheck} 
-                                    defaultValue={values.firstTimeBuyer}>
-                                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                                    <FormControlLabel value="No" control={<Radio />} label="No" />
-                                </RadioGroup>
-                            </FormControl>  
+                        {/* End of Family nucleus section */}
+                        
+                        {/* Start of Prev Housing subsidy section */}
+                          <ListItem primaryText="Recipient Of Previous Housing Subsidies"/>
+                                <Button className={styles.button} onClick={this.handleOpen}>
+                                    Option: 
+                                </Button>
+                              <FormControl className={styles.formControl}>
+                                <InputLabel id="firsTimeBuyers"></InputLabel>
+                                <Select
+                                    labelId="firsTimeBuyers-open-select-label"
+                                    id="firsTimeBuyers"
+                                    open={this.open}
+                                    onClose={this.handleClose}
+                                    onOpen={this.handleOpen}
+                                    value={values.firstTimeBuyers}
+                                    onChange={handleChange('firstTimeBuyers')}
+                                >
+                                <br/>
+                                  <MenuItem value="">
+                                      <em>None</em>
+                                  </MenuItem>
+                                  <MenuItem value= "All First-Timers">All Applicants Are First-Timers</MenuItem>
+                                  <MenuItem value= "One First-Timer, One Second-Timer">You're A First-Timer; Your Significant Other Is Second-Timer And Has Received Only One Housing Subsidy </MenuItem>
+                                  </Select>
+                              </FormControl>
+                          {/* End of Prev Housing subsidy section */}
+
+                          {/* Start of Current age section */}
                           <ListItem primaryText="Enter your current age"/>
                             <TextField
                                 hintText = "Enter your current age here"
@@ -73,6 +92,9 @@ export class EHGPersonalDetails extends Component {
                                 onChange={handleChange('currentAge')}
                                 defaultValue={values.currentAge}
                               />
+                          {/* End of current age section */}
+                          
+                          {/* Start of Lease section */}
                           <ListItem
                             primaryText="Remaining lease of flat?"/>
                             <TextField 
@@ -81,6 +103,9 @@ export class EHGPersonalDetails extends Component {
                                 onChange={handleChange('lease')}
                                 defaultValue={values.lease}
                               />
+                          {/* End of Lease section */}
+                          
+                          {/* Start of First timers section */}
                           <ListItem primaryText="Employment: Have at least 1 applicant that has been working for at least 12 months?"/>
                             <FormControl component="fieldset">
                                     <RadioGroup aria-label="employmentStatus" 
@@ -92,6 +117,9 @@ export class EHGPersonalDetails extends Component {
                                     <FormControlLabel value="No" control={<Radio />} label="No" />
                                 </RadioGroup>
                             </FormControl> 
+                          {/* End of Lease section */}
+
+                          {/* Start of income section */}
                           <ListItem
                             primaryText="What is the average gross monthly household income for the past 12 months"/>
                             <TextField 
@@ -99,7 +127,9 @@ export class EHGPersonalDetails extends Component {
                                 floatingLabelFixed='income'
                                 onChange={handleChange('income')}
                                 defaultValue={values.income}
-                              />           
+                              /> 
+                          {/* End of income section */}
+                                      
                       </List>
                       <RaisedButton
                           label="Continue"
