@@ -15,6 +15,11 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 
 export class EHGPersonalDetails extends Component {
   
+  constructor(props){
+    super(props);
+    console.log(this.props)
+  } 
+
   continue = e =>{
     e.preventDefault();
     this.props.nextStepEHG()
@@ -33,7 +38,7 @@ export class EHGPersonalDetails extends Component {
                   <AppBar title="Enhance Housing Grant (EHG) Eligibility For Families And Singles"/>
                       <List>
                         {/* Start of Family nucleus section */}
-                          <ListItem primaryText="Please choose your family nucleus"/>
+                          <ListItem primaryText="Please Choose Your Family Nucleus"/>
                           <Button className={styles.button} onClick={this.handleOpen}>
                               Selection: 
                           </Button>
@@ -52,8 +57,8 @@ export class EHGPersonalDetails extends Component {
                               <MenuItem value="">
                                   <em>None</em>
                               </MenuItem>
-                              <MenuItem value="EHG-Singles">Singles (Single Orphan With Unmarried Siblings OR Child living with parents)</MenuItem>
-                              <MenuItem value= "EHG-Marrieds">Married (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
+                              <MenuItem value="EHG-Singles">First-timer and a Second-timer couple OR Single Orphan With Unmarried Siblings OR Single Child living with parents</MenuItem>
+                              <MenuItem value= "EHG-Family">Married Couple OR Fiancé/Fiancée Couple  </MenuItem>
                               </Select>
                           </FormControl>
                         {/* End of Family nucleus section */}
@@ -110,8 +115,8 @@ export class EHGPersonalDetails extends Component {
                             <FormControl component="fieldset">
                                     <RadioGroup aria-label="employmentStatus" 
                                     name="employmentStatus" 
-                                    value={this.state} 
-                                    onChange={this.handleCheck} 
+                                    value={this.employmentStatus} 
+                                    onChange={handleChange('employmentStatus')}
                                     defaultValue={values.employmentStatus}>
                                     <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
                                     <FormControlLabel value="No" control={<Radio />} label="No" />

@@ -17,7 +17,7 @@ import Button from '@material-ui/core/Button';
 
 export class FGPersonalDetails extends Component {
 
-   constructor(props){
+    constructor(props){
         super(props);
         console.log(this.props)
     } 

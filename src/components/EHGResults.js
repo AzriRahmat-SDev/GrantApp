@@ -21,8 +21,8 @@ export class EHGResults extends Component {
                     <AppBar title = "Results Page"/>
                     <List>
                         <ListItem
-                            primaryText = "Your amount of grants you are eligable for"
-                            secondaryText = { grantMonies }
+                            primaryText = "Your amount of grants you are eligible for"
+                            secondaryText = { '$'+ grantMonies }
                         />
                         <ListItem
                             primaryText = "You also qualify for these other grants"
