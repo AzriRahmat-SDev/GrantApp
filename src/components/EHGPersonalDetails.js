@@ -43,15 +43,15 @@ export class EHGPersonalDetails extends Component {
                               Selection: 
                           </Button>
                           <FormControl className={styles.formControl}>
-                              <InputLabel id="maritial-status"></InputLabel>
+                              <InputLabel id="marital-status"></InputLabel>
                               <Select
-                              labelId="maritial-status-open-select-label"
-                              id="maritial-status"
+                              labelId="marital-status-open-select-label"
+                              id="marital-status"
                               open={this.props.open}
                               onClose={this.handleClose}
                               onOpen={this.handleOpen}
-                              value={values.maritialStatus}
-                              onChange={handleChange('maritialStatus')}
+                              value={values.maritalStatus}
+                              onChange={handleChange('maritalStatus')}
                               >
                               <br/>
                               <MenuItem value="">

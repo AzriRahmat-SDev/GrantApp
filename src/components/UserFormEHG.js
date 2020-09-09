@@ -9,7 +9,7 @@ export class UserFormEHG extends Component {
 
     state={
         step: 1,
-        maritialStatus: '',
+        maritalStatus: '',
         currentAge: null,
         lease: null,
         firstTimeBuyers: '',
@@ -18,7 +18,10 @@ export class UserFormEHG extends Component {
         remainingYearsTo95: null,
         proRatedVariable: 0,
         grantMonies: '$1,000,000',
+        grantMoniesStr: '$',
+        grantMoniesResult:'',
         otherQualifiedGrants: 'Proximity Grant Scheme',
+        errorMessage: 'Sorry You Did Not Qualify For Enhanced Housing Grant',
         open:false,
         setOpen:false,
     }
@@ -41,7 +44,7 @@ export class UserFormEHG extends Component {
         const { step } = this.state;
         this.setState({
             step: step/step,
-            maritialStatus: null,
+            maritalStatus: null,
             currentAge: null,
             lease: null,
             firstTimeBuyers: null,
@@ -50,6 +53,8 @@ export class UserFormEHG extends Component {
             remainingYearsTo95: null,
             proRatedVariable: 0,
             grantMonies: '$1,000,000',
+            grantMoniesStr: '$',
+            grantMoniesResult: '',
             otherQualifiedGrants: 'Proximity Grant Scheme',
             open:false,
             setOpen:false,
@@ -57,16 +62,16 @@ export class UserFormEHG extends Component {
     }
 
     proratedCalculation = () =>{
-        const { grantMonies,proRatedVariable } = this.state;
+        const { grantMonies,proRatedVariable,grantMoniesStr } = this.state;
         this.setState({
-            grantMonies: grantMonies * proRatedVariable.toFixed(2)
+            grantMoniesResult: (grantMoniesStr) + grantMonies * proRatedVariable.toFixed(2),
         })
     }
 
     toCalculate = () => {
         // start of EHG-singles with first-timers above 35
         if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -75,7 +80,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 40000,
+                grantMonies:  40000,
+                grantMoniesResult: "$40000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -84,7 +90,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -93,7 +99,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 37500,
+                grantMonies:  37500,
+                grantMoniesResult: "$37500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -102,7 +109,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -111,7 +118,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 35000,
+                grantMonies:  35000,
+                grantMoniesResult: "$35000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -120,7 +128,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -129,7 +137,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 32500,
+                grantMonies:  32500,
+                grantMoniesResult: "$32500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -138,7 +147,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -147,7 +156,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 30000,
+                grantMonies:  30000,
+                grantMoniesResult: "$30000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -156,7 +166,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -165,7 +175,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 27500,
+                grantMonies:  27500,
+                grantMoniesResult: "$27500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -174,7 +185,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -183,7 +194,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 25000,
+                grantMonies:  25000,
+                grantMoniesResult: "$25000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -192,7 +204,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -201,7 +213,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 22500,
+                grantMonies:  22500,
+                grantMoniesResult: "$22500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -210,7 +223,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -219,7 +232,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 20000,
+                grantMonies:  20000,
+                grantMoniesResult: "$20000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -228,7 +242,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -237,7 +251,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 17500,
+                grantMonies:  17500,
+                grantMoniesResult: "$17500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -246,7 +261,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -255,7 +270,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 15000,
+                grantMonies:  15000,
+                grantMoniesResult: "$15000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -264,7 +280,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -273,7 +289,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 12500,
+                grantMonies:  12500,
+                grantMoniesResult: "$12500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -282,7 +299,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -291,7 +308,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 10000,
+                grantMonies:  10000,
+                grantMoniesResult: "$10000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -300,7 +318,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -309,7 +327,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 7500,
+                grantMonies:  7500,
+                grantMoniesResult: "$7500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -318,7 +337,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -327,7 +346,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 5000,
+                grantMonies:  5000,
+                grantMoniesResult: "$5000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -336,7 +356,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Singles') &&
+            this.state.maritalStatus.includes('EHG-Singles') &&
             this.state.currentAge >= 35 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -345,7 +365,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 2500,
+                grantMonies:  2500,
+                grantMoniesResult: "$2500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -356,7 +377,7 @@ export class UserFormEHG extends Component {
             // End of EHG-singles with first-timers above 35
         }else if(
             // Start of EHG-Singles with FTSC above 21
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -365,7 +386,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 40000,
+                grantMonies:  40000,
+                grantMoniesResult: "$40000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -374,7 +396,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -383,7 +405,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 37500,
+                grantMonies:  37500,
+                grantMoniesResult: "$37500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -392,7 +415,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -401,7 +424,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 35000,
+                grantMonies:  35000,
+                grantMoniesResult: "$35000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -410,7 +434,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -419,7 +443,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 32500,
+                grantMonies:  32500,
+                grantMoniesResult: "$32500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -428,7 +453,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -437,7 +462,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 30000,
+                grantMonies:  30000,
+                grantMoniesResult: "$30000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -446,7 +472,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -455,7 +481,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 27500,
+                grantMonies:  27500,
+                grantMoniesResult: "$27500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -464,7 +491,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -473,7 +500,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 25000,
+                grantMonies:  25000,
+                grantMoniesResult: "$25000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -482,7 +510,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -491,7 +519,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 22500,
+                grantMonies:  22500,
+                grantMoniesResult: "$22500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -500,7 +529,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -509,7 +538,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 20000,
+                grantMonies:  20000,
+                grantMoniesResult: "$20000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -518,7 +548,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -527,7 +557,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 17500,
+                grantMonies:  17500,
+                grantMoniesResult: "$17500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -536,7 +567,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -545,7 +576,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 15000,
+                grantMonies:  15000,
+                grantMoniesResult: "$15000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -554,7 +586,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -563,7 +595,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 12500,
+                grantMonies:  12500,
+                grantMoniesResult: "$12500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -572,7 +605,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -581,7 +614,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 10000,
+                grantMonies:  10000,
+                grantMoniesResult: "$10000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -590,7 +624,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -599,7 +633,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 7500,
+                grantMonies:  7500,
+                grantMoniesResult: "$7500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -608,7 +643,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -617,7 +652,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 5000,
+                grantMonies:  5000,
+                grantMoniesResult: "$5000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -626,7 +662,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('One First-Timer, One Second-Timer') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -635,7 +671,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 2500,
+                grantMonies:  2500,
+                grantMoniesResult: "$2500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -646,7 +683,7 @@ export class UserFormEHG extends Component {
             // End of EHG-Singles with FT-SC above 21
         }else if(
             // Start of EHG-Couple with FT above 21
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -655,7 +692,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 80000,
+                grantMonies:  80000,
+                grantMoniesResult: "$80000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -664,7 +702,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -673,7 +711,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 75000,
+                grantMonies:  75000,
+                grantMoniesResult: "$75000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -682,7 +721,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -691,7 +730,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 70000,
+                grantMonies:  70000,
+                grantMoniesResult: "$70000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -700,7 +740,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -709,7 +749,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 65000,
+                grantMonies:  65000,
+                grantMoniesResult: "$65000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -718,7 +759,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -727,7 +768,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 60000,
+                grantMonies:  60000,
+                grantMoniesResult: "$60000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -736,7 +778,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -745,7 +787,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 55000,
+                grantMonies:  55000,
+                grantMoniesResult: "$55000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -754,7 +797,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -763,7 +806,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 50000,
+                grantMonies:  50000,
+                grantMoniesResult: "$50000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -772,7 +816,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -781,7 +825,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 45000,
+                grantMonies:  45000,
+                grantMoniesResult: "$45000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -790,7 +835,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -799,7 +844,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 40000,
+                grantMonies:  40000,
+                grantMoniesResult: "$40000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -808,7 +854,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -817,7 +863,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 35000,
+                grantMonies:  35000,
+                grantMoniesResult: "$35000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -826,7 +873,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -835,7 +882,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 30000,
+                grantMonies:  30000,
+                grantMoniesResult: "$30000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -844,7 +892,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -853,7 +901,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 25000,
+                grantMonies:  25000,
+                grantMoniesResult: "$25000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -862,7 +911,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -871,7 +920,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 20000,
+                grantMonies:  20000,
+                grantMoniesResult: "$20000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -880,7 +930,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -889,7 +939,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 15000,
+                grantMonies:  15000,
+                grantMoniesResult: "$15000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -898,7 +949,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -907,7 +958,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 10000,
+                grantMonies:  10000,
+                grantMoniesResult: "$10000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -916,7 +968,7 @@ export class UserFormEHG extends Component {
             }
             return true;
         }else if(
-            this.state.maritialStatus.includes('EHG-Family') &&
+            this.state.maritalStatus.includes('EHG-Family') &&
             this.state.currentAge >= 21 &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
             this.state.employmentStatus.includes('Yes') &&
@@ -925,7 +977,8 @@ export class UserFormEHG extends Component {
         )
         {
             this.setState({
-                grantMonies: 5000,
+                grantMonies:  5000,
+                grantMoniesResult: "$5000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
             })
@@ -936,6 +989,9 @@ export class UserFormEHG extends Component {
             // End of EHG-Couple with FT above 21
         }
         else{
+            this.setState({
+                grantMoniesResult: this.state.errorMessage
+            })
             return true;
         }
         
@@ -955,8 +1011,8 @@ export class UserFormEHG extends Component {
 
     render() {
         const { step } = this.state;
-        const { maritialStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,otherQualifiedGrants,remainingYearsTo95,proRatedVariable} = this.state;
-        const values = { maritialStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,otherQualifiedGrants,remainingYearsTo95,proRatedVariable};
+        const { maritalStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,otherQualifiedGrants,remainingYearsTo95,proRatedVariable,errorMessage,grantMoniesStr,grantMoniesResult} = this.state;
+        const values = { maritalStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,otherQualifiedGrants,remainingYearsTo95,proRatedVariable,errorMessage,grantMoniesStr,grantMoniesResult};
 
         switch(step){
             default:

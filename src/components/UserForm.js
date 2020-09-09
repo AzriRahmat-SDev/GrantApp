@@ -60,7 +60,7 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Singles Grant')
         )
         {
-            this.setState({grantMonies: '$25,000'})
+            this.setState({grantMonies: '$25000'})
             return true;
         }
         else if (
@@ -71,7 +71,7 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Singles Grant')
         )
         {
-            this.setState({grantMonies: '$20,000'})
+            this.setState({grantMonies: '$20000'})
             return true;
         }
         else if (
@@ -82,7 +82,7 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Family Grant')
         )
         {
-            this.setState({grantMonies: '$50,000'})
+            this.setState({grantMonies: '$50000'})
             return true;
         }
         else if (
@@ -93,7 +93,7 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Family Grant')
         )
         {
-            this.setState({grantMonies: '$40,000'})
+            this.setState({grantMonies: '$40000'})
             return true;
         }
         else if (
@@ -104,7 +104,7 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Family Grant')
         )
         {
-            this.setState({grantMonies: '$40,000'})
+            this.setState({grantMonies: '$40000'})
             return true;
         }
         else if (
@@ -116,7 +116,7 @@ export class UserForm extends Component {
         )
         {
             this.setState({familyNucleus: 'Half-Family Grant'});
-            this.setState({grantMonies: '$30,000'})
+            this.setState({grantMonies: '$30000'})
             return true;
         }
         else if (
@@ -128,7 +128,7 @@ export class UserForm extends Component {
         )
         {
             this.setState({familyNucleus: 'Half-Family Grant'});
-            this.setState({grantMonies: '$25,000'})
+            this.setState({grantMonies: '$25000'})
             return true;
         }
         else if (
@@ -140,7 +140,7 @@ export class UserForm extends Component {
         )
         {
             this.setState({familyNucleus: 'Half-Family Grant'});
-            this.setState({grantMonies: '$20,000'})
+            this.setState({grantMonies: '$20000'})
             return true;
         }
         else if (
@@ -152,7 +152,7 @@ export class UserForm extends Component {
         )
         {
             this.setState({familyNucleus: 'Half-Family Grant'});
-            this.setState({grantMonies: '$20,000'})
+            this.setState({grantMonies: '$20000'})
             return true;
         }
         else if (
@@ -164,7 +164,7 @@ export class UserForm extends Component {
         )
         {
             this.setState({familyNucleus: 'Half-Family Grant'});
-            this.setState({grantMonies: '$15,000'})
+            this.setState({grantMonies: '$15000'})
             return true;
         }
         

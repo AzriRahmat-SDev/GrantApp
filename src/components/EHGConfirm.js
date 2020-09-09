@@ -8,7 +8,6 @@ export class EHGConfirm extends Component {
 
     continue = e => {
         e.preventDefault();
-        //Process form here (data sent to back end api)
         this.props.nextStepEHG();
     };
     back = e => {
@@ -17,31 +16,31 @@ export class EHGConfirm extends Component {
     };
 
     render() {
-        const { values:{maritialStatus,currentAge,lease,firstTimeBuyers,income} } = this.props;
+        const { values:{maritalStatus,currentAge,lease,firstTimeBuyers,income} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title = "Confirmation"/>
                     <List>
                         <ListItem
-                            primaryText = "Your maritial status"
-                            secondaryText = { maritialStatus }
+                            primaryText = "Based On Your Marital You Will Be Categorized Under"
+                            secondaryText = { maritalStatus }
                         />
                         <ListItem
-                            primaryText = "Your current age"
-                            secondaryText = { currentAge }
+                            primaryText = "Your Age"
+                            secondaryText = { "You're " + currentAge + " years old" }
                         />
                         <ListItem
-                            primaryText = "The remaining lease of flat "
-                            secondaryText = { lease }
+                            primaryText = "The Remaining Lease Of Your Intended Flat To Purchase "
+                            secondaryText = { lease + " years of lease left" }
                         />
                         <ListItem
-                            primaryText = "First time buyer? "
+                            primaryText = "Are You First Time Buyer?"
                             secondaryText = { firstTimeBuyers }
                         />
                         <ListItem
-                            primaryText = "Your average household income "
-                            secondaryText = { income }
+                            primaryText = "Your Average Household Income Are As Follows "
+                            secondaryText = { "$" + income }
                         />
                     </List>
                     <RaisedButton

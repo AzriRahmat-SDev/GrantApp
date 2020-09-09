@@ -13,7 +13,7 @@ export class EHGResults extends Component {
 
     render() {
         
-    const {values: {grantMonies, otherQualifiedGrants}} = this.props;
+    const {values: {grantMoniesResult, otherQualifiedGrants}} = this.props;
 
         return (
             <MuiThemeProvider>
@@ -22,10 +22,10 @@ export class EHGResults extends Component {
                     <List>
                         <ListItem
                             primaryText = "Your amount of grants you are eligible for"
-                            secondaryText = { '$'+ grantMonies }
+                            secondaryText = { grantMoniesResult }
                         />
                         <ListItem
-                            primaryText = "You also qualify for these other grants"
+                            primaryText = "You might also qualify for these other grants"
                             secondaryText = { otherQualifiedGrants }
                         />
                     </List>
