@@ -62,8 +62,8 @@ export class UserFormPG extends Component {
 
     render() {
         const { step } = this.state;
-        const { maritalStatus,currentAge,citizenship,houseHoldStatus,firstLocation,secondLocation,proximityType,grantMonies,otherQualifiedGrants } = this.state;
-        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,firstLocation,secondLocation,proximityType,grantMonies,otherQualifiedGrants };
+        const { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants } = this.state;
+        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants };
 
         switch(step){
             default:

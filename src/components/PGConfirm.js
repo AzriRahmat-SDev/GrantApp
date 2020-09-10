@@ -17,23 +17,31 @@ export class PGConfirm extends Component {
     };
 
     render() {
-        const { values:{maritialStatus, firstLocation, secondLocation} } = this.props;
+        const { values:{maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
                     <AppBar title = "Confirmation"/>
                     <List>
                         <ListItem
-                            primaryText = "Your marital status"
-                            secondaryText = { maritialStatus }
+                            primaryText = "Your Current Age"
+                            secondaryText = { "You're " + currentAge + " years old" }
                         />
                         <ListItem
-                            primaryText = "Postal Code of intended purchased DBSS flat"
-                            secondaryText = { firstLocation }
+                            primaryText = "At Least 1 Of Your Family Members Is A Singaporean Or A Singaporean Permanent Resident"
+                            secondaryText = { "You have answered " + citizenship }
                         />
                         <ListItem
-                            primaryText = "Postal Code of your parents' or child's place of residence"
-                            secondaryText = { secondLocation }
+                            primaryText = "Based On Your Marital Status You Will Be Categorized Under"
+                            secondaryText = { maritalStatus }
+                        />
+                        <ListItem
+                            primaryText = "You have chosen to"
+                            secondaryText = { proximityType }
+                        />
+                        <ListItem
+                            primaryText = "Have you received a Proximity Housing Grant before? "
+                            secondaryText = { "You have answered " + houseHoldStatus }
                         />
                     </List>
                     <RaisedButton

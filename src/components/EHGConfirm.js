@@ -23,7 +23,7 @@ export class EHGConfirm extends Component {
                     <AppBar title = "Confirmation"/>
                     <List>
                         <ListItem
-                            primaryText = "Based On Your Marital You Will Be Categorized Under"
+                            primaryText = "Based On Your Marital Status You Will Be Categorized Under"
                             secondaryText = { maritalStatus }
                         />
                         <ListItem

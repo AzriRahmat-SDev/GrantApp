@@ -75,8 +75,8 @@ back = e => {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        <MenuItem value="Single">Single (Single Orphan With Unmarried Siblings OR Child living with parents)</MenuItem>
-                                        <MenuItem value= "Family">Married (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
+                                        <MenuItem value="Singles grant">Single (Single Orphan With Unmarried Siblings OR Child living with parents)</MenuItem>
+                                        <MenuItem value= "Family grant">Married (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
                                         </Select>
                                     </FormControl>
                                     {/* Start of Marital status section */}
@@ -101,9 +101,9 @@ back = e => {
                                         <MenuItem value="">
                                             <em>None</em>
                                         </MenuItem>
-                                        <MenuItem value= "Living with parent/children">You Wish To Live With Your Parents/Children</MenuItem>
-                                        <MenuItem value= "Within 4km from family">You Wish To Live Within 4km From Your Family Members</MenuItem>
-                                        <MenuItem value= "None of the above">None Of The Above</MenuItem>
+                                        <MenuItem value= "Live with your parents or/and children">I Wish To Live With My Parents/Children</MenuItem>
+                                        <MenuItem value= "Live within 4km from your other family members">I Wish To Live Within 4km From My Family Members</MenuItem>
+                                        <MenuItem value= "Select none of the available options ">None Of The Above</MenuItem>
                                         </Select>
                                     </FormControl>
                                     {/* End of Proximity type subsidy section */}
