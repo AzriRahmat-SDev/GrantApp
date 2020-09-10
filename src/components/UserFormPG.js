@@ -8,9 +8,11 @@ export class UserFormPG extends Component {
 
     state={
         step: 1,
-        maritialStatus: null,
-        firstLocation: null,
-        secondLocation: null,
+        currentAge:null,
+        citizenship:null,
+        houseHoldStatus:null,
+        maritalStatus: null,
+        proximityType: null,
         grantMonies: '$1,000,000',
         otherQualifiedGrants: 'Proximity Grant Scheme',
         open:false,
@@ -34,9 +36,15 @@ export class UserFormPG extends Component {
         const { step } = this.state;
         this.setState({
             step: step/step,
-            maritialStatus: null,
-            firstLocation: null,
-            secondLocation: null,
+            currentAge:null,
+            citizenship:null,
+            houseHoldStatus:null,
+            maritalStatus: null,
+            proximityType: null,
+            grantMonies: '$1,000,000',
+            otherQualifiedGrants: 'Proximity Grant Scheme',
+            open:false,
+            setOpen:false,
         })
     }
 
@@ -54,8 +62,8 @@ export class UserFormPG extends Component {
 
     render() {
         const { step } = this.state;
-        const { maritialStatus,firstLocation,secondLocation,grantMonies,otherQualifiedGrants } = this.state;
-        const values = { maritialStatus,firstLocation,secondLocation,grantMonies,otherQualifiedGrants };
+        const { maritalStatus,currentAge,citizenship,houseHoldStatus,firstLocation,secondLocation,proximityType,grantMonies,otherQualifiedGrants } = this.state;
+        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,firstLocation,secondLocation,proximityType,grantMonies,otherQualifiedGrants };
 
         switch(step){
             default:
