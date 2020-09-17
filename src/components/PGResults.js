@@ -21,7 +21,7 @@ export class PGResults extends Component {
                     <AppBar title = "Results Page"/>
                     <List>
                         <ListItem
-                            primaryText = "Your amount of grants you are eligable for"
+                            primaryText = "Your amount of grants you are eligible for"
                             secondaryText = { grantMonies }
                         />
                         <ListItem

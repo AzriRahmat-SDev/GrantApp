@@ -12,7 +12,7 @@ export class FGResults extends Component {
     }
 
     render() {
-        const { values:{grantMonies, otherQualifiedGrants} } = this.props;
+        const { values:{grantMonies, qualifiedGrantResults} } = this.props;
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -24,7 +24,7 @@ export class FGResults extends Component {
                         />
                         <ListItem
                             primaryText = "You also qualify for these other grants"
-                            secondaryText = { otherQualifiedGrants }
+                            secondaryText = { qualifiedGrantResults }
                         />
                     </List>
                     <RaisedButton

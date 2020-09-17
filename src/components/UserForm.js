@@ -10,12 +10,13 @@ export class UserForm extends Component {
         citizenship: '',
         currentAge: null,
         firstTimeBuyers: '',
-        lease: null,
         typeOfFlat: '',
         familyNucleus: '',
-        financialStatus: null,
-        grantMonies: '$1,000,000',
-        otherQualifiedGrants: 'Proximity Grant Scheme',
+        grantMonies: '',
+        qualifiedGrantResults:'',
+        otherQualifiedGrants: 'Enhanced CPF Housing Grant Scheme & Proximity Grant Scheme',
+        otherQualifiedGrants1: 'Enhanced CPF Housing Grant Scheme For Singles',
+        otherQualifiedGrants2: 'Proximity Grant Scheme',
         open:false,
         setOpen:false,
     }
@@ -25,7 +26,8 @@ export class UserForm extends Component {
         this.setState({
             step: step + 1
         });
-        this.toCalculate()
+        this.toCalculate();
+        this.toCheck()
     }
 
     prevStep = () => {
@@ -42,33 +44,37 @@ export class UserForm extends Component {
             citizenship: '',
             currentAge: null,
             firstTimeBuyers: '',
-            lease:'',
             typeOfFlat:'',
             familyNucleus: '',
-            financialStatus: null,
             grantMonies: '',
-            otherQualifiedGrants: 'Proximity Grant Scheme'
+            qualifiedGrantResults:'',
+            otherQualifiedGrants: 'Enhanced CPF Housing Grant Scheme & Proximity Grant Scheme',
+            otherQualifiedGrants1: 'Enhanced CPF Housing Grant Scheme For Singles',
+            otherQualifiedGrants2: 'Proximity Grant Scheme',
+            open:false,
+            setOpen:false,
         })
     }
 
     toCalculate = () =>{
         if(
-            this.state.citizenship.includes('Other') &&
+            
             this.state.currentAge >= 35 &&
+            this.state.familyNucleus.includes('Singles Grant') &&
+            this.state.citizenship.includes('Single') &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
-            this.state.typeOfFlat.includes('2 to 4 room resale flat') &&
-            this.state.familyNucleus.includes('Singles Grant')
+            this.state.typeOfFlat.includes('2 to 4 room resale flat')
         )
         {
             this.setState({grantMonies: '$25000'})
             return true;
         }
         else if (
-            this.state.citizenship.includes('Other') &&
             this.state.currentAge >= 35 &&
+            this.state.familyNucleus.includes('Singles Grant') &&
+            this.state.citizenship.includes('Single') &&
             this.state.firstTimeBuyers.includes('All First-Timers') &&
-            this.state.typeOfFlat.includes('5 Room or bigger resale flat') &&
-            this.state.familyNucleus.includes('Singles Grant')
+            this.state.typeOfFlat.includes('5 Room or bigger resale flat')
         )
         {
             this.setState({grantMonies: '$20000'})
@@ -115,7 +121,6 @@ export class UserForm extends Component {
             this.state.familyNucleus.includes('Family Grant')
         )
         {
-            this.setState({familyNucleus: 'Half-Family Grant'});
             this.setState({grantMonies: '$30000'})
             return true;
         }
@@ -174,6 +179,32 @@ export class UserForm extends Component {
         }
     }
 
+    toCheck = () => {
+        if
+        (
+            this.state.firstTimeBuyers ===  "One First-Timer, One Second-Timer" &&
+            this.state.citizenship !== "Other"
+        )
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants1 })
+            return true;
+        }
+        else if 
+        (
+            this.state.firstTimeBuyers !== "Other" &&
+            this.state.citizenship !== "Other"
+        )
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants })
+            return true;
+        }
+        else
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants2})
+            return true;
+        }
+    }
+
     handleChange = input => e => {
         this.setState({[input]: e.target.value});
     };
@@ -188,8 +219,8 @@ export class UserForm extends Component {
 
     render() {
         const { step } = this.state;
-        const { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus,grantMonies,otherQualifiedGrants } = this.state;
-        const values = { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus, financialStatus, grantMonies,otherQualifiedGrants };
+        const { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2 } = this.state;
+        const values = { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus, financialStatus, grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2 };
 
         switch(step){
             default:

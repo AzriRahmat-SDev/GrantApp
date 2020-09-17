@@ -15,6 +15,7 @@ export class UserFormPG extends Component {
         proximityType: null,
         grantMonies: '$1,000,000',
         otherQualifiedGrants: 'Proximity Grant Scheme',
+        errorMessage: 'Sorry You Did Not Qualify For Enhanced Housing Grant',
         open:false,
         setOpen:false,
     }
@@ -24,6 +25,7 @@ export class UserFormPG extends Component {
         this.setState({
             step: step + 1
         });
+        this.toCalculate()
     }
    prevStepPG = () =>{
         const { step } = this.state;
@@ -60,10 +62,63 @@ export class UserFormPG extends Component {
         this.setOpen();
     };
 
+    toCalculate = () =>{
+        if(
+                this.state.currentAge >= 35 &&
+                this.state.citizenship.includes("Yes") &&
+                this.state.maritalStatus.includes("Singles grant") &&
+                this.state.proximityType.includes("Live with your parents or/and children") &&
+                this.state.houseHoldStatus.includes("No")
+        )
+        {
+            this.setState({grantMonies: '$15000'})
+            return true;
+        }
+        else if(
+            this.state.currentAge >= 35 &&
+            this.state.citizenship.includes("Yes") &&
+            this.state.maritalStatus.includes("Singles grant") &&
+            this.state.proximityType.includes("Live within 4km from your other family members") &&
+            this.state.houseHoldStatus.includes("No")
+        )
+        {
+            this.setState({grantMonies: '$10000'})
+            return true;
+        }
+        else if(
+            this.state.currentAge >= 21 &&
+            this.state.citizenship.includes("Yes") &&
+            this.state.maritalStatus.includes("Family grant") &&
+            this.state.proximityType.includes("Live with your parents or/and children") &&
+            this.state.houseHoldStatus.includes("No")
+        )
+        {
+            this.setState({grantMonies: '$30000'})
+            return true;
+        }
+        else if(
+            this.state.currentAge >= 21 &&
+            this.state.citizenship.includes("Yes") &&
+            this.state.maritalStatus.includes("Family grant") &&
+            this.state.proximityType.includes("Live within 4km from your other family members") &&
+            this.state.houseHoldStatus.includes("No")
+        )
+        {
+            this.setState({grantMonies: '$30000'})
+            return true;
+        }
+        else{
+            this.setState({
+                grantMonies: this.state.errorMessage
+            })
+            return true;
+        }
+    }
+
     render() {
         const { step } = this.state;
-        const { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants } = this.state;
-        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants };
+        const { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants,errorMessage } = this.state;
+        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants,errorMessage };
 
         switch(step){
             default:

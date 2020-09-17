@@ -43,21 +43,6 @@ export class FGPersonalDetails extends Component {
                                 />
                     {/* End of Age Section */}
 
-                    {/* Start of Citizenship section */}
-                        <ListItem primaryText="Enter Your Citizenship"/>
-                            <FormControl component="fieldset">
-                                <RadioGroup aria-label="citizenship" 
-                                    name="citizenship" 
-                                    value={this.citizenship} 
-                                    onChange={handleChange('citizenship')} 
-                                    defaultValue={values.citizenship}>
-                                        <FormControlLabel value="Both Are Singaporean citizens" control={<Radio />} label="Singaporean Citizen + Singaporean Citizen" />
-                                        <FormControlLabel value="One Singaporean with a Singaporean permanent resident" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
-                                        <FormControlLabel value="Others" control={<Radio />} label="Others" />
-                                </RadioGroup>
-                            </FormControl>
-                    {/* End of Citizenship Section */}
-
                     {/* Start of Family Nucleus section */}
                         <ListItem primaryText="Please Choose Your Family Nucleus"/>
                                 <Button className={styles.button} onClick={this.handleOpen}>
@@ -84,6 +69,23 @@ export class FGPersonalDetails extends Component {
                             </FormControl>
                     {/* End of Family Nucleus section */}
 
+
+                    {/* Start of Citizenship section */}
+                        <ListItem primaryText="Enter Your Citizenship"/>
+                            <FormControl component="fieldset">
+                                <RadioGroup aria-label="citizenship" 
+                                    name="citizenship" 
+                                    value={this.citizenship} 
+                                    onChange={handleChange('citizenship')} 
+                                    defaultValue={values.citizenship}>
+                                        <FormControlLabel value="Both Are Singaporean citizens" control={<Radio />} label="Singaporean Citizen + Singaporean Citizen" />
+                                        <FormControlLabel value="One Singaporean with a Singaporean permanent resident" control={<Radio />} label="Singapore Citizen + Singapore Permanent Resident" />
+                                        <FormControlLabel value="Single" control={<Radio />} label="Single + 1 Family Member(Singaporean/Singapore Permanent Resident)" />
+                                        <FormControlLabel value="Other" control={<Radio />} label="Others" />
+                                </RadioGroup>
+                            </FormControl>
+                    {/* End of Citizenship Section */}
+
                     {/* Start of Prev Housing subsidy section */}
                         <ListItem primaryText="Recipient Of Previous Housing Subsidies"/>
                                 <Button className={styles.button} onClick={this.handleOpen}>
@@ -106,6 +108,7 @@ export class FGPersonalDetails extends Component {
                                 </MenuItem>
                                 <MenuItem value= "All First-Timers">All Applicants Are First-Timers</MenuItem>
                                 <MenuItem value= "One First-Timer, One Second-Timer">You're A First-Timer; Your Significant Other Is Second-Timer And Has Received Only One Housing Subsidy </MenuItem>
+                                <MenuItem value= "Other">Others</MenuItem>
                                 </Select>
                             </FormControl>
                     {/* End of Prev Housing subsidy section */}
