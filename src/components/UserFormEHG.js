@@ -55,7 +55,11 @@ export class UserFormEHG extends Component {
             grantMonies: '$1,000,000',
             grantMoniesStr: '$',
             grantMoniesResult: '',
-            otherQualifiedGrants: 'Proximity Grant Scheme',
+            qualifiedGrantResults:'',
+            otherQualifiedGrants: 'CPF Housing Grant Scheme & Proximity Grant Scheme',
+            otherQualifiedGrants1: 'CPF Half-Housing Grant Scheme',
+            otherQualifiedGrants2: 'CPF Housing Grant Scheme For Singles & Proximity Grant Scheme',
+            otherQualifiedGrants3: 'Proximity Grant Scheme',
             open:false,
             setOpen:false,
             })
@@ -997,6 +1001,42 @@ export class UserFormEHG extends Component {
         
     }
 
+    toCheck = () => {
+        if
+        ( 
+            this.state.maritalStatus === "EHG-Family" &&
+            this.state.firstTimeBuyers ===  "One First-Timer, One Second-Timer"
+            
+        )
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants1 })
+            return true;
+        }
+        else if 
+        (
+            this.state.maritalStatus === "EHG-Singles" &&
+            this.state.firstTimeBuyers === "All First-Timers" 
+        )
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants2 })
+            return true;
+        }
+        else if 
+        (
+            this.state.maritalStatus !== "Other" &&
+            this.state.firstTimeBuyers === "All First-Timers" 
+        )
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants })
+            return true;
+        }
+        else
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants3 })
+            return true;
+        }
+    }
+
     handleChange = input => e => {
         this.setState({[input]: e.target.value});
     };
@@ -1011,8 +1051,8 @@ export class UserFormEHG extends Component {
 
     render() {
         const { step } = this.state;
-        const { maritalStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,otherQualifiedGrants,remainingYearsTo95,proRatedVariable,errorMessage,grantMoniesStr,grantMoniesResult} = this.state;
-        const values = { maritalStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,otherQualifiedGrants,remainingYearsTo95,proRatedVariable,errorMessage,grantMoniesStr,grantMoniesResult};
+        const { maritalStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2,otherQualifiedGrants3,remainingYearsTo95,proRatedVariable,errorMessage,grantMoniesStr,grantMoniesResult} = this.state;
+        const values = { maritalStatus,currentAge,lease,firstTimeBuyers, employmentStatus, income,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2,otherQualifiedGrants3,remainingYearsTo95,proRatedVariable,errorMessage,grantMoniesStr,grantMoniesResult};
 
         switch(step){
             default:

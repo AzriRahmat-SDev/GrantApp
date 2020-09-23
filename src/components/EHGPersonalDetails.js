@@ -57,8 +57,9 @@ export class EHGPersonalDetails extends Component {
                               <MenuItem value="">
                                   <em>None</em>
                               </MenuItem>
-                              <MenuItem value="EHG-Singles">First-timer and a Second-timer couple OR Single Orphan With Unmarried Siblings OR Single Child living with parents</MenuItem>
+                              <MenuItem value="EHG-Singles">Single Orphan With Unmarried Siblings OR Single Child living with parents</MenuItem>
                               <MenuItem value= "EHG-Family">Married Couple OR Fiancé/Fiancée Couple  </MenuItem>
+                              <MenuItem value= "Other">Others</MenuItem>
                               </Select>
                           </FormControl>
                         {/* End of Family nucleus section */}
@@ -85,6 +86,7 @@ export class EHGPersonalDetails extends Component {
                                   </MenuItem>
                                   <MenuItem value= "All First-Timers">All Applicants Are First-Timers</MenuItem>
                                   <MenuItem value= "One First-Timer, One Second-Timer">You're A First-Timer; Your Significant Other Is Second-Timer And Has Received Only One Housing Subsidy </MenuItem>
+                                  <MenuItem value= "Other">Others</MenuItem>
                                   </Select>
                               </FormControl>
                           {/* End of Prev Housing subsidy section */}
