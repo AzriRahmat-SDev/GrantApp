@@ -13,7 +13,7 @@ export class PGResults extends Component {
 
     render() {
 
-        const { values:{grantMonies, otherQualifiedGrants} } = this.props;
+        const { values:{grantMonies, qualifiedGrantResults} } = this.props;
 
         return (
             <MuiThemeProvider>
@@ -26,7 +26,7 @@ export class PGResults extends Component {
                         />
                         <ListItem
                             primaryText = "You also qualify for these other grants"
-                            secondaryText = { otherQualifiedGrants }
+                            secondaryText = { qualifiedGrantResults }
                         />
                     </List>
                     <RaisedButton

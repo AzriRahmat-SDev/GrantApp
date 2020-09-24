@@ -14,7 +14,9 @@ export class UserFormPG extends Component {
         maritalStatus: null,
         proximityType: null,
         grantMonies: '$1,000,000',
-        otherQualifiedGrants: 'Proximity Grant Scheme',
+        qualifiedGrantResults:'',
+        otherQualifiedGrants: 'CPF Housing Grant Scheme & Enhanced Housing Grant Scheme',
+        otherQualifiedGrants1: 'CPF Half-Housing Grant Scheme',
         errorMessage: 'Sorry You Did Not Qualify For Enhanced Housing Grant',
         open:false,
         setOpen:false,
@@ -26,6 +28,7 @@ export class UserFormPG extends Component {
             step: step + 1
         });
         this.toCalculate()
+        this.toCheck()
     }
    prevStepPG = () =>{
         const { step } = this.state;
@@ -44,7 +47,10 @@ export class UserFormPG extends Component {
             maritalStatus: null,
             proximityType: null,
             grantMonies: '$1,000,000',
-            otherQualifiedGrants: 'Proximity Grant Scheme',
+            qualifiedGrantResults:'',
+            otherQualifiedGrants: 'CPF Housing Grant Scheme & Enhanced Housing Grant Scheme',
+            otherQualifiedGrants1: 'CPF Half-Housing Grant Scheme',
+            errorMessage: 'Sorry You Did Not Qualify For Enhanced Housing Grant',
             open:false,
             setOpen:false,
         })
@@ -115,10 +121,28 @@ export class UserFormPG extends Component {
         }
     }
 
+    toCheck = () => {
+        if
+        ( 
+            this.state.citizenship === "Yes" &&
+            this.state.maritalStatus ===  "Singles grant"
+            
+        )
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants1 })
+            return true;
+        }
+        else
+        {
+            this.setState({ qualifiedGrantResults: this.state.otherQualifiedGrants })
+            return true;
+        }
+    }
+
     render() {
         const { step } = this.state;
-        const { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants,errorMessage } = this.state;
-        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,otherQualifiedGrants,errorMessage };
+        const { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,errorMessage } = this.state;
+        const values = { maritalStatus,currentAge,citizenship,houseHoldStatus,proximityType,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,errorMessage };
 
         switch(step){
             default:

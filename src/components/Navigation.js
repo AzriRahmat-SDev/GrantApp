@@ -14,10 +14,13 @@ function Navigation() {
     <nav>
             <ul className="nav-Links">
                 {/* <button style={ButtonStyle}> */}
-                <Link style={NavigationStyles} to="/Homepage">
-                    <li>Home</li>
-                </Link>
                 {/* </button> */}
+                <Link style={NavigationStyles} to="#">
+                    <li>Housing Grants For HDB Flats</li>
+                </Link>
+                <Link style={NavigationStyles} to="/FGPersonalDetails">
+                    <li>Housing Grants For DBSS Flats</li>
+                </Link>
                 <Link style={NavigationStyles} to="/FGPersonalDetails">
                     <li>CPF Housing Grant</li>
                 </Link>

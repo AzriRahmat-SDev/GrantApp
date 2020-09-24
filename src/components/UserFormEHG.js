@@ -21,6 +21,9 @@ export class UserFormEHG extends Component {
         grantMoniesStr: '$',
         grantMoniesResult:'',
         otherQualifiedGrants: 'Proximity Grant Scheme',
+        otherQualifiedGrants1: 'CPF Half-Housing Grant Scheme',
+        otherQualifiedGrants2: 'CPF Housing Grant Scheme For Singles & Proximity Grant Scheme',
+        otherQualifiedGrants3: 'Proximity Grant Scheme',
         errorMessage: 'Sorry You Did Not Qualify For Enhanced Housing Grant',
         open:false,
         setOpen:false,
@@ -60,6 +63,7 @@ export class UserFormEHG extends Component {
             otherQualifiedGrants1: 'CPF Half-Housing Grant Scheme',
             otherQualifiedGrants2: 'CPF Housing Grant Scheme For Singles & Proximity Grant Scheme',
             otherQualifiedGrants3: 'Proximity Grant Scheme',
+            errorMessage: 'Sorry You Did Not Qualify For Enhanced Housing Grant',
             open:false,
             setOpen:false,
             })
