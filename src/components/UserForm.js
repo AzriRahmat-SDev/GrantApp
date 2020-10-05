@@ -1,7 +1,11 @@
-import React, { Component } from 'react'
-import FGPersonalDetails from './FGPersonalDetails'
-import FGConfirm from './FGConfirm'
-import FGResults from './FGResults'
+import React, { Component } from 'react';
+import FGPersonalDetails from './FGPersonalDetails';
+import FGConfirm from './FGConfirm';
+import FGResults from './FGResults';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { List,ListItem } from 'material-ui/List';
+import AppBar from 'material-ui/AppBar';
+import TextField from 'material-ui/TextField';
 
 export class UserForm extends Component {
 
@@ -19,6 +23,7 @@ export class UserForm extends Component {
         otherQualifiedGrants2: 'Proximity Grant Scheme',
         open:false,
         setOpen:false,
+        isLoggedIn:false
     }
 
     nextStep = () => {
@@ -221,6 +226,24 @@ export class UserForm extends Component {
         const { step } = this.state;
         const { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus,financialStatus,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2 } = this.state;
         const values = { citizenship, currentAge, firstTimeBuyers, lease, typeOfFlat, familyNucleus, financialStatus, grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2 };
+
+        if(this.state.isLoggedIn){
+            return <MuiThemeProvider>
+                <React.Fragment>
+                    <AppBar title="CPF Housing Grant Eligibility"/>
+                    <List> 
+                    {/* Start of Age section */}
+                        <ListItem primaryText="Welcome User"/>
+                            <TextField
+                                hintText = "Please Log in"
+                                floatingLabelFixed='currentAge'
+                                onChange={this.handleChange('currentAge')}
+                                defaultValue={values.currentAge}
+                                />
+                                </List>
+                </React.Fragment>
+            </MuiThemeProvider>
+        }
 
         switch(step){
             default:

@@ -77,7 +77,6 @@ back = e => {
                                         </MenuItem>
                                         <MenuItem value="Singles grant">Single (Single Orphan With Unmarried Siblings OR Child living with parents)</MenuItem>
                                         <MenuItem value= "Family grant">Married (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
-                                        <MenuItem value= "Others">Others</MenuItem>
                                         </Select>
                                     </FormControl>
                                     {/* Start of Marital status section */}
