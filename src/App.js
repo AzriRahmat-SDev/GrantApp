@@ -27,7 +27,7 @@ function App() {
         <Route exact path="/EHGPersonalDetails" component={UserFormEHG}/>
         <Route exact path="/PGPersonalDetails" component={UserFormPG}/>
 
-        {/* BTO Nave section */}
+        {/* BTO Nav section */}
         <Route exact path="/HomepageBTO" component={UserFormBTO}/>
 
         
