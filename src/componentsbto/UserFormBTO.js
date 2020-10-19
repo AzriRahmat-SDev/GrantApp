@@ -19,20 +19,18 @@ export class UserFormBTO extends Component {
 
     state={
         step: 1,
-        citizenship: '',
+        citizenship: null,
         currentAge: null,
         lease: null,
-        firstTimeBuyers: '',
-        employmentStatus: '',
+        firstTimeBuyers: null,
+        employmentStatus: null,
         income: null,
-        typeOfFlat: '',
-        familyNucleus: '',
-        grantMonies: '',
+        familyNucleus: null,
+        remainingYearsTo95: null,
+        proRatedVariable: 0,
+        grantMonies: '$1,000,000',
+        grantMoniesStr: '$',
         grantMoniesResult: '',
-        qualifiedGrantResults:'',
-        otherQualifiedGrants: 'Enhanced CPF Housing Grant Scheme & Proximity Grant Scheme',
-        otherQualifiedGrants1: 'Enhanced CPF Housing Grant Scheme For Singles',
-        otherQualifiedGrants2: 'Proximity Grant Scheme',
         open:false,
         setOpen:false,
 
@@ -105,8 +103,11 @@ export class UserFormBTO extends Component {
             income: null,
             typeOfFlat:'',
             familyNucleus: '',
+            remainingYearsTo95: null,
+            proRatedVariable: 0,
             grantMonies: '',
             grantMoniesResult: '',
+            grantMoniesStr: '$',
             qualifiedGrantResults:'',
             otherQualifiedGrants: 'Enhanced CPF Housing Grant Scheme & Proximity Grant Scheme',
             otherQualifiedGrants1: 'Enhanced CPF Housing Grant Scheme For Singles',
@@ -147,6 +148,246 @@ export class UserFormBTO extends Component {
                 this.proratedCalculation()
             }
             return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 750 && this.state.income < 1000)
+        )
+        {
+            this.setState({
+                grantMonies:  37500,
+                grantMoniesResult: "$37500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1000 && this.state.income < 1250)
+        )
+        {
+            this.setState({
+                grantMonies:  35000,
+                grantMoniesResult: "$35000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1250 && this.state.income < 1500)
+        )
+        {
+            this.setState({
+                grantMonies:  32500,
+                grantMoniesResult: "$32500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1500 && this.state.income < 1750)
+        )
+        {
+            this.setState({
+                grantMonies:  30000,
+                grantMoniesResult: "$30000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1750 && this.state.income < 2000)
+        )
+        {
+            this.setState({
+                grantMonies:  27500,
+                grantMoniesResult: "$27500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2000 && this.state.income < 2250)
+        )
+        {
+            this.setState({
+                grantMonies:  25000,
+                grantMoniesResult: "$25000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2250 && this.state.income < 2500)
+        )
+        {
+            this.setState({
+                grantMonies:  22500,
+                grantMoniesResult: "$22500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2500 && this.state.income < 2750)
+        )
+        {
+            this.setState({
+                grantMonies:  20000,
+                grantMoniesResult: "$20000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2750 && this.state.income < 3000)
+        )
+        {
+            this.setState({
+                grantMonies:  17500,
+                grantMoniesResult: "$17500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3000 && this.state.income < 3250)
+        )
+        {
+            this.setState({
+                grantMonies:  15000,
+                grantMoniesResult: "$15000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3250 && this.state.income < 3500)
+        )
+        {
+            this.setState({
+                grantMonies:  12500,
+                grantMoniesResult: "$12500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3500 && this.state.income < 3750)
+        )
+        {
+            this.setState({
+                grantMonies:  10000,
+                grantMoniesResult: "$10000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3750 && this.state.income < 4000)
+        )
+        {
+            this.setState({
+                grantMonies:  7500,
+                grantMoniesResult: "$7500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4000 && this.state.income < 4250)
+        )
+        {
+            this.setState({
+                grantMonies:  5000,
+                grantMoniesResult: "$5000",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4250 && this.state.income < 4500)
+        )
+        {
+            this.setState({
+                grantMonies:  2500,
+                grantMoniesResult: "$2500",
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            })
+            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
+                this.proratedCalculation()
+            }
+            return true;
         }
 
 
@@ -174,8 +415,8 @@ export class UserFormBTO extends Component {
     render() {
 
         const { step } = this.state;
-        const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income, typeOfFlat, familyNucleus,financialStatus,grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2,open,setOpen,grantMoniesResult } = this.state;
-        const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income, typeOfFlat, familyNucleus, financialStatus, grantMonies,qualifiedGrantResults,otherQualifiedGrants,otherQualifiedGrants1,otherQualifiedGrants2,open,setOpen, grantMoniesResult};
+        const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult } = this.state;
+        const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult};
          
         if(this.state.isStartPage){
             return <MuiThemeProvider>
