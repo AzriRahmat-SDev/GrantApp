@@ -22,15 +22,15 @@ export class UserFormBTO extends Component {
         citizenship: null,
         currentAge: null,
         lease: null,
-        firstTimeBuyers: null,
-        employmentStatus: null,
+        firstTimeBuyers: '',
+        employmentStatus: '',
         income: null,
         familyNucleus: null,
         remainingYearsTo95: null,
         proRatedVariable: 0,
-        grantMonies: '$1,000,000',
+        grantMonies: null,
         grantMoniesStr: '$',
-        grantMoniesResult: '',
+        grantMoniesResult: null,
         open:false,
         setOpen:false,
 
@@ -76,7 +76,9 @@ export class UserFormBTO extends Component {
     continueToResult = e => {
         e.preventDefault();
         console.log(this.state)
-        this.setState({isSecondPage:false, isResultPage:true})
+        this.setState({
+            isSecondPage:false,isResultPage:true,
+        },()=>{console.log(this.state)})
         this.toCheckForCalculation()
 
     };
@@ -131,6 +133,15 @@ export class UserFormBTO extends Component {
         }
     }
 
+    proratedCalculation = () =>{
+        //const { grantMonies,proRatedVariable} = this.state;
+        this.setState(
+            {grantMoniesResult:"$" + this.state.grantMonies * this.state.proRatedVariable.toFixed(2)
+        },()=> {}
+        
+        )
+    }
+
     toCheckForCalculation = () =>{
         if(
             this.state.employmentStatus.includes('Yes') &&
@@ -138,14 +149,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 0 && this.state.income < 750) 
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  40000,
-                grantMoniesResult: "$40000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (40000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$40000'
+                })
             }
             return true;
         }else if(
@@ -154,14 +171,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 750 && this.state.income < 1000)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  37500,
-                grantMoniesResult: "$37500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (37500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$37500'
+                })
             }
             return true;
         }else if(
@@ -170,14 +193,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 1000 && this.state.income < 1250)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  35000,
-                grantMoniesResult: "$35000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (35000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$35000'
+                })
             }
             return true;
         }else if(
@@ -186,14 +215,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 1250 && this.state.income < 1500)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  32500,
-                grantMoniesResult: "$32500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (32500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$32500'
+                })
             }
             return true;
         }else if(
@@ -202,14 +237,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 1500 && this.state.income < 1750)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  30000,
-                grantMoniesResult: "$30000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (30000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$30000'
+                })
             }
             return true;
         }else if(
@@ -218,14 +259,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 1750 && this.state.income < 2000)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  27500,
-                grantMoniesResult: "$27500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (27500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$27500'
+                })
             }
             return true;
         }else if(
@@ -234,14 +281,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 2000 && this.state.income < 2250)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  25000,
-                grantMoniesResult: "$25000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (25000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$25000'
+                })
             }
             return true;
         }else if(
@@ -250,14 +303,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 2250 && this.state.income < 2500)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  22500,
-                grantMoniesResult: "$22500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (22500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$22500'
+                })
             }
             return true;
         }else if(
@@ -266,14 +325,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 2500 && this.state.income < 2750)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  20000,
-                grantMoniesResult: "$20000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (20000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$20000'
+                })
             }
             return true;
         }else if(
@@ -282,14 +347,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 2750 && this.state.income < 3000)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  17500,
-                grantMoniesResult: "$17500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (17500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$17500'
+                })
             }
             return true;
         }else if(
@@ -298,14 +369,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 3000 && this.state.income < 3250)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  15000,
-                grantMoniesResult: "$15000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (15000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$15000'
+                })
             }
             return true;
         }else if(
@@ -314,14 +391,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 3250 && this.state.income < 3500)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  12500,
-                grantMoniesResult: "$12500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (12500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$12500'
+                })
             }
             return true;
         }else if(
@@ -330,14 +413,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 3500 && this.state.income < 3750)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  10000,
-                grantMoniesResult: "$10000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (10000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$10000'
+                })
             }
             return true;
         }else if(
@@ -346,14 +435,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 3750 && this.state.income < 4000)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  7500,
-                grantMoniesResult: "$7500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (7500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$7500'
+                })
             }
             return true;
         }else if(
@@ -362,14 +457,20 @@ export class UserFormBTO extends Component {
             (this.state.income >= 4000 && this.state.income < 4250)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  5000,
-                grantMoniesResult: "$5000",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (5000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$5000'
+                })
             }
             return true;
         }else if(
@@ -378,28 +479,24 @@ export class UserFormBTO extends Component {
             (this.state.income >= 4250 && this.state.income < 4500)
         )
         {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
             this.setState({
-                grantMonies:  2500,
-                grantMoniesResult: "$2500",
                 remainingYearsTo95: 95 - this.state.currentAge,
                 proRatedVariable: this.state.lease/(95 - this.state.currentAge)
-            })
-            if((this.state.lease/this.state.remainingYearsTo95 <= 1)){
-                this.proratedCalculation()
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (2500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$2500'
+                })
             }
             return true;
         }
-
-
     }
-
-    proratedCalculation = () =>{
-        const { grantMonies,proRatedVariable,grantMoniesStr } = this.state;
-        this.setState({
-            grantMoniesResult: (grantMoniesStr) + grantMonies * proRatedVariable.toFixed(2),
-        })
-    }
-
     handleChange = input => e => {
         this.setState({[input]: e.target.value});
     };
@@ -414,9 +511,9 @@ export class UserFormBTO extends Component {
 
     render() {
 
-        const { step } = this.state;
-        const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult } = this.state;
-        const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult};
+        const { step } = this.state
+        const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult } = this.state
+        const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult}
          
         if(this.state.isStartPage){
             return <MuiThemeProvider>
@@ -516,8 +613,8 @@ export class UserFormBTO extends Component {
                                     value={this.employmentStatus} 
                                     onChange={this.handleChange('employmentStatus')}
                                     defaultValue={values.employmentStatus}>
-                                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
-                                    <FormControlLabel value="No" control={<Radio />} label="No" />
+                                    <FormControlLabel value='Yes' control={<Radio />} label="Yes" />
+                                    <FormControlLabel value='No' control={<Radio />} label="No" />
                                 </RadioGroup>
                             </FormControl> 
                           {/* End of Lease section */}
