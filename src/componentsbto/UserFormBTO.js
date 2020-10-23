@@ -18,7 +18,7 @@ import Button from '@material-ui/core/Button';
 export class UserFormBTO extends Component {
 
     state={
-        step: 1,
+
         citizenship: null,
         currentAge: null,
         lease: null,
@@ -40,13 +40,13 @@ export class UserFormBTO extends Component {
         isResultPage:false,
         
         //Ternary section
-        firstTimeGrantMode:false,
-        secondTimerGrantMode:false,
-        mixedTimerGrantMode:false,
-        singleGrantMode:false,
+        familyGrantMode:false,
         jointSingleGrantMode:false,
+        secondTimerGrantMode:false,
+        singleGrantMode:false,
+        mixedTimerGrantMode:false,
+        nonCitizenSpouseMode:false
         
-
     }
 
     nextStep = () => {
@@ -79,7 +79,30 @@ export class UserFormBTO extends Component {
         this.setState({
             isSecondPage:false,isResultPage:true,
         },()=>{console.log(this.state)})
-        this.toCheckForCalculation()
+
+        if(this.state.singleGrantMode){
+            this.toCheckForCalculationForSingleGrant()
+        }
+        
+        if(this.state.jointSingleGrantMode){
+            this.toCheckForCalculationForJointSingleGrant()
+        }
+
+        if(this.state.familyGrantMode){
+            this.toCheckForCalculationForFamilyGrant()
+        }
+
+        if(this.state.mixedTimerGrantMode){
+            this.toCheckForCalculationForMixedFamilyGrant()
+        }
+
+        if(this.state.secondTimerGrantMode){
+            this.toCheckForCalculationForSecondTimerGrant()
+        }
+
+        if(this.state.nonCitizenSpouseMode){
+            this.to.toCheckForCalculationForNonCitizenSpouse()
+        }
 
     };
 
@@ -122,13 +145,63 @@ export class UserFormBTO extends Component {
     }
 
     toCheckForGrantType = () =>{
+
+        const { currentAge, familyNucleus, firstTimeBuyers } = this.state
+
         if(
-            this.state.currentAge >= 35 &&
-            this.state.familyNucleus.includes("Singles Grant") &&
-            this.state.firstTimeBuyers.includes("All First-Timers")
+            currentAge >= 35 &&
+            familyNucleus.includes("Singles Grant") &&
+            firstTimeBuyers.includes("All First-Timers")
         )
         {
             this.setState({isSecondPage: true, singleGrantMode:true})
+
+        }
+
+        if(
+            currentAge >= 35 &&
+            familyNucleus.includes("Joint Singles Grant") &&
+            firstTimeBuyers.includes("All First-Timers")
+        )
+        {
+            this.setState({isSecondPage: true, jointSingleGrantMode:true})
+
+        }
+
+        if(
+            currentAge >= 21 &&
+            familyNucleus.includes("Family Grant") &&
+            firstTimeBuyers.includes("All First-Timers")
+        )
+        {
+            this.setState({isSecondPage: true, familyGrantMode:true})
+        }
+
+        if(
+            currentAge >= 21 &&
+            familyNucleus.includes("Family Grant") &&
+            firstTimeBuyers.includes("Second-Timers")
+        )
+        {
+            this.setState({isSecondPage: false, secondTimerGrantMode:true})
+        }
+
+        if(
+            currentAge >= 21 &&
+            familyNucleus.includes("Family Grant") &&
+            firstTimeBuyers.includes("One First-Timer, One Second-Timer")
+        )
+        {
+            this.setState({isSecondPage: true, mixedTimerGrantMode:true})
+        }
+
+        if(
+            currentAge >= 35 &&
+            familyNucleus.includes("Non Citizen Spouse Scheme") &&
+            firstTimeBuyers.includes("All First-Timers")
+        )
+        {
+            this.setState({isSecondPage: true, nonCitizenSpouseMode:true})
 
         }
     }
@@ -142,7 +215,1435 @@ export class UserFormBTO extends Component {
         )
     }
 
-    toCheckForCalculation = () =>{
+    toCheckForCalculationForSingleGrant = () =>{
+        if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 0 && this.state.income < 750) 
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (40000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$40000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 750 && this.state.income < 1000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (37500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$37500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1000 && this.state.income < 1250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (35000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$35000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1250 && this.state.income < 1500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (32500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$32500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1500 && this.state.income < 1750)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (30000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$30000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1750 && this.state.income < 2000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (27500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$27500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2000 && this.state.income < 2250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (25000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$25000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2250 && this.state.income < 2500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (22500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$22500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2500 && this.state.income < 2750)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (20000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$20000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2750 && this.state.income < 3000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (17500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$17500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3000 && this.state.income < 3250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (15000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$15000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3250 && this.state.income < 3500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (12500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$12500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3500 && this.state.income < 3750)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (10000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$10000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3750 && this.state.income < 4000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (7500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$7500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4000 && this.state.income < 4250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (5000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$5000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4250 && this.state.income < 4500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (2500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$2500'
+                })
+            }
+            return true;
+        }
+    }
+
+    toCheckForCalculationForJointSingleGrant = () =>{
+        if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 0 && this.state.income < 1500) 
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (80000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$80000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1500 && this.state.income < 2000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (75000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$75000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2000 && this.state.income < 2500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (70000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$70000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2500 && this.state.income < 3000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (65000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$65000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3000 && this.state.income < 3500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (60000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$60000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3500 && this.state.income < 4000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (55000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$55000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4000 && this.state.income < 4500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (50000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$50000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4500 && this.state.income < 5000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (45000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$45000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 5000 && this.state.income < 5000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (40000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$40000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 5000 && this.state.income < 6000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (35000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$35000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 6000 && this.state.income < 6500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (30000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$30000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 6500 && this.state.income < 7000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (25000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$25000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 7000 && this.state.income < 7500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (20000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$20000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 7500 && this.state.income < 8000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (15000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$15000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 8000 && this.state.income < 8500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (10000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$10000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 8500 && this.state.income < 9000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (5000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$5000'
+                })
+            }
+            return true;
+        }
+    }
+
+    toCheckForCalculationForFamilyGrant = () =>{
+        if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 0 && this.state.income < 1500) 
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (80000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$80000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1500 && this.state.income < 2000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (75000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$75000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2000 && this.state.income < 2500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (70000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$70000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2500 && this.state.income < 3000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (65000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$65000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3000 && this.state.income < 3500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (60000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$60000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3500 && this.state.income < 4000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (55000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$55000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4000 && this.state.income < 4500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (50000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$50000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4500 && this.state.income < 5000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (45000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$45000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 5000 && this.state.income < 5000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (40000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$40000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 5000 && this.state.income < 6000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (35000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$35000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 6000 && this.state.income < 6500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (30000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$30000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 6500 && this.state.income < 7000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (25000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$25000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 7000 && this.state.income < 7500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (20000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$20000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 7500 && this.state.income < 8000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (15000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$15000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 8000 && this.state.income < 8500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (10000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$10000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 8500 && this.state.income < 9000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (5000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$5000'
+                })
+            }
+            return true;
+        }
+    }
+
+    toCheckForCalculationForMixedFamilyGrant = () =>{
+        if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 0 && this.state.income < 750) 
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (40000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$40000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 750 && this.state.income < 1000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (37500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$37500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1000 && this.state.income < 1250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (35000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$35000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1250 && this.state.income < 1500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (32500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$32500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1500 && this.state.income < 1750)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (30000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$30000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 1750 && this.state.income < 2000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (27500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$27500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2000 && this.state.income < 2250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (25000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$25000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2250 && this.state.income < 2500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (22500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$22500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2500 && this.state.income < 2750)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (20000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$20000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 2750 && this.state.income < 3000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (17500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$17500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3000 && this.state.income < 3250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (15000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$15000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3250 && this.state.income < 3500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (12500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$12500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3500 && this.state.income < 3750)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (10000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$10000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 3750 && this.state.income < 4000)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (7500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$7500'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4000 && this.state.income < 4250)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (5000 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$5000'
+                })
+            }
+            return true;
+        }else if(
+            this.state.employmentStatus.includes('Yes') &&
+            (this.state.lease >= 20 && this.state.lease <= 100) &&
+            (this.state.income >= 4250 && this.state.income < 4500)
+        )
+        {
+            let proRatedVariable = this.state.lease/(95-this.state.currentAge)
+            this.setState({
+                remainingYearsTo95: 95 - this.state.currentAge,
+                proRatedVariable: this.state.lease/(95 - this.state.currentAge)
+            },()=>{})
+            
+            if((proRatedVariable < 1)){
+                this.setState({
+                    grantMoniesResult: this.state.grantMoniesStr + (2500 * proRatedVariable.toFixed(2))
+                },()=>{})
+            }else{
+                this.setState({
+                    grantMoniesResult:'$2500'
+                })
+            }
+            return true;
+        }
+    }
+
+    toCheckForCalculationForSecondTimerGrant = () =>{
+        return true
+    }
+
+    toCheckForCalculationForNonCitizenSpouse = () => {
         if(
             this.state.employmentStatus.includes('Yes') &&
             (this.state.lease >= 20 && this.state.lease <= 100) &&
@@ -511,7 +2012,6 @@ export class UserFormBTO extends Component {
 
     render() {
 
-        const { step } = this.state
         const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult } = this.state
         const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult}
          
@@ -552,7 +2052,7 @@ export class UserFormBTO extends Component {
                                     <em>None</em>
                                 </MenuItem>
                                 <MenuItem value="Singles Grant"> Single (Sole applicant)</MenuItem>
-                                <MenuItem value="Joint Singles Grant"> Joint Singles or Orphan (Single Orphan With Unmarried Siblings)</MenuItem>
+                                <MenuItem value="Joint Singles Grant"> Joint Single or Orphan (Single Orphan With Unmarried Siblings)</MenuItem>
                                 <MenuItem value="Family Grant">Married Couple (Married Couple OR Fiancé/Fiancée couple OR Widowed/Divorce with children under legal custody)</MenuItem>
                                 <MenuItem value="Non Citizen Spouse Scheme">Married couple with a Non Citizen Spouse</MenuItem>
                                 </Select>
@@ -602,11 +2102,11 @@ export class UserFormBTO extends Component {
         else if (this.state.isSecondPage){
             return <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar title="CPF Housing Grant Eligibility For Singles"/>
+                    <AppBar title="CPF Housing Grant Eligibility"/>
                     <List>
 
                         {/* Start of First timers section */}
-                        <ListItem primaryText="Employment: Have at least 1 applicant that has been working for at least 12 months?"/>
+                        <ListItem primaryText="Employment: Have At Least 1 Applicant That Has Been Working For At Least 12 Months?"/>
                             <FormControl component="fieldset">
                                     <RadioGroup aria-label="employmentStatus" 
                                     name="employmentStatus" 
@@ -621,7 +2121,7 @@ export class UserFormBTO extends Component {
 
                           {/* Start of Lease section */}
                           <ListItem
-                            primaryText="Remaining lease of flat?"/>
+                            primaryText="Remaining Lease Of Flat?"/>
                             <TextField 
                                 hintText = "Enter remaining lease here"
                                 floatingLabelFixed='lease'
@@ -632,7 +2132,7 @@ export class UserFormBTO extends Component {
 
                           {/* Start of income section */}
                           <ListItem
-                            primaryText="What is the average gross monthly household income for the past 12 months"/>
+                            primaryText="What Is The Average Gross Monthly Household Income For The Past 12 Months"/>
                             <TextField 
                                 hintText = "Enter average income here"
                                 floatingLabelFixed='income'
@@ -661,13 +2161,18 @@ export class UserFormBTO extends Component {
             </MuiThemeProvider>
             
         }
+        else if (this.state.secondTimerGrantMode){
+            return <div>
+                        this is the page for Second-timers
+                    </div>
+        }
         else if (this.state.isResultPage){
             return <MuiThemeProvider>
                 <React.Fragment>
-                <AppBar title="CPF Housing Grant Eligibility For Singles"/>
+                <AppBar title="CPF Housing Grant Eligibility"/>
                     <List>
                     <ListItem
-                            primaryText = "Your amount of grants you are eligible for"
+                            primaryText = "Your Amount Of Grants You Are Eligible For"
                             secondaryText = { grantMoniesResult }
                         />
                     </List>
