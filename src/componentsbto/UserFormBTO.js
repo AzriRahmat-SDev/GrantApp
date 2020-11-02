@@ -24,6 +24,8 @@ export class UserFormBTO extends Component {
         lease: null,
         firstTimeBuyers: '',
         employmentStatus: '',
+        flatType:'',
+        currentFlatType:'',
         income: null,
         familyNucleus: null,
         remainingYearsTo95: null,
@@ -37,12 +39,13 @@ export class UserFormBTO extends Component {
         //Page section
         isStartPage:true,
         isSecondPage:false,
+        isSecondTimerPage:false,
         isResultPage:false,
         
         //Ternary section
         familyGrantMode:false,
         jointSingleGrantMode:false,
-        secondTimerGrantMode:false,
+        secondTimerMode:false,
         singleGrantMode:false,
         mixedTimerGrantMode:false,
         nonCitizenSpouseMode:false
@@ -75,9 +78,9 @@ export class UserFormBTO extends Component {
 
     continueToResult = e => {
         e.preventDefault();
-        console.log(this.state)
+
         this.setState({
-            isSecondPage:false,isResultPage:true,
+            isSecondPage:false,isSecondTimerPage:false,isResultPage:true,
         },()=>{console.log(this.state)})
 
         if(this.state.singleGrantMode){
@@ -96,21 +99,23 @@ export class UserFormBTO extends Component {
             this.toCheckForCalculationForMixedFamilyGrant()
         }
 
-        if(this.state.secondTimerGrantMode){
+        if(this.state.nonCitizenSpouseMode){
+            this.toCheckForCalculationForNonCitizenSpouse()
+        }
+
+        if(this.state.secondTimerMode){
             this.toCheckForCalculationForSecondTimerGrant()
         }
 
-        if(this.state.nonCitizenSpouseMode){
-            this.to.toCheckForCalculationForNonCitizenSpouse()
-        }
-
     };
+
 
     back = e => {
         e.preventDefault();
         this.setState({
             isStartPage: true,
-            isSecondPage:false
+            isSecondPage:false,
+            isSecondTimerPage:false
         })
 
         //this.props.prevStep();
@@ -118,29 +123,39 @@ export class UserFormBTO extends Component {
     };
 
     backToHome = () =>{
-        const { step } = this.state;
         this.setState({
-            step: step/step,
+
+            citizenship: null,
             currentAge: null,
             lease: null,
             firstTimeBuyers: '',
             employmentStatus: '',
+            flatType:'',
+            currentFlatType:'',
             income: null,
-            typeOfFlat:'',
-            familyNucleus: '',
+            familyNucleus: null,
             remainingYearsTo95: null,
             proRatedVariable: 0,
-            grantMonies: '',
-            grantMoniesResult: '',
+            grantMonies: null,
             grantMoniesStr: '$',
-            qualifiedGrantResults:'',
-            otherQualifiedGrants: 'Enhanced CPF Housing Grant Scheme & Proximity Grant Scheme',
-            otherQualifiedGrants1: 'Enhanced CPF Housing Grant Scheme For Singles',
-            otherQualifiedGrants2: 'Proximity Grant Scheme',
+            grantMoniesResult: null,
             open:false,
             setOpen:false,
+    
+            //Page section
             isStartPage:true,
-            isSecondPage:false
+            isSecondPage:false,
+            isSecondTimerPage:false,
+            isResultPage:false,
+            
+            //Ternary section
+            familyGrantMode:false,
+            jointSingleGrantMode:false,
+            secondTimerMode:false,
+            singleGrantMode:false,
+            mixedTimerGrantMode:false,
+            nonCitizenSpouseMode:false
+            
         })
     }
 
@@ -183,7 +198,7 @@ export class UserFormBTO extends Component {
             firstTimeBuyers.includes("Second-Timers")
         )
         {
-            this.setState({isSecondPage: false, secondTimerGrantMode:true})
+            this.setState({isSecondPage: false, secondTimerMode:true,isSecondTimerPage:true})
         }
 
         if(
@@ -1640,7 +1655,16 @@ export class UserFormBTO extends Component {
     }
 
     toCheckForCalculationForSecondTimerGrant = () =>{
-        return true
+        if(
+            (this.state.flatType !== 3) &&
+            (this.state.currentFlatType !== 3) &&
+            this.state.employmentStatus.includes("Yes") &&
+            this.state.income <= 7000
+        )
+        {
+            this.setState({grantMoniesResult: '$15000'},()=>{console.log(this.state.grantMoniesResult)})
+        }
+        return true;
     }
 
     toCheckForCalculationForNonCitizenSpouse = () => {
@@ -2012,8 +2036,8 @@ export class UserFormBTO extends Component {
 
     render() {
 
-        const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult } = this.state
-        const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult}
+        const { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus,flatType,currentFlatType, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult } = this.state
+        const values = { citizenship, currentAge, firstTimeBuyers, lease, employmentStatus,flatType,currentFlatType, income,remainingYearsTo95,proRatedVariable, typeOfFlat, familyNucleus, grantMonies, open, setOpen, grantMoniesStr, grantMoniesResult}
          
         if(this.state.isStartPage){
             return <MuiThemeProvider>
@@ -2161,10 +2185,108 @@ export class UserFormBTO extends Component {
             </MuiThemeProvider>
             
         }
-        else if (this.state.secondTimerGrantMode){
-            return <div>
-                        this is the page for Second-timers
-                    </div>
+        else if (this.state.isSecondTimerPage){
+            return <MuiThemeProvider>
+            <React.Fragment>
+                <AppBar title="CPF Housing Grant Eligibility"/>
+                <List>
+
+                    {/* Start of First timers section */}
+                    <ListItem primaryText="Employment: Have At Least 1 Applicant That Has Been Working For At Least 12 Months?"/>
+                            <FormControl component="fieldset">
+                                    <RadioGroup aria-label="employmentStatus" 
+                                    name="employmentStatus" 
+                                    value={this.employmentStatus} 
+                                    onChange={this.handleChange('employmentStatus')}
+                                    defaultValue={values.employmentStatus}>
+                                    <FormControlLabel value="Yes" control={<Radio />} label="Yes" />
+                                    <FormControlLabel value= "No" control={<Radio />} label="No" />
+                                </RadioGroup>
+                            </FormControl> 
+                    {/* End of Lease section */}
+
+                    {/* Start of Flat Application */}
+                    <ListItem primaryText="What Is The Type Of Flat That You're Applying For"/>
+                                <Button className={styles.button} onClick={this.handleOpen}>
+                                    Option: 
+                                </Button>
+                            <FormControl className={styles.formControl}>
+                                <InputLabel id="flat-type"></InputLabel>
+                                <Select
+                                labelId="flat-type-open-select-label"
+                                id="flat-type"
+                                open={this.open}
+                                onClose={this.setOpen}
+                                onOpen={this.setOpen}
+                                onChange={this.handleChange('flatType')}
+                                value={values.flatType}
+                                >
+                                <br/>
+                                <MenuItem value= {1}>
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="2 Room Flexi"> 2-Room Flexi In A Non-Mature Estate</MenuItem>
+                                <MenuItem value="3 Room Flexi"> 3-Room Flexi In A Non-Mature Estate</MenuItem>
+                                <MenuItem value= {3} >Others</MenuItem>
+                                </Select>
+                            </FormControl>
+                    {/* End of Flat Application */}
+
+                    {/* Start of Current Living Flat */}
+                    <ListItem primaryText="What Is The Type Of Flat That You're Currently Living In"/>
+                                <Button className={styles.button} onClick={this.handleOpen}>
+                                    Option: 
+                                </Button>
+                            <FormControl className={styles.formControl}>
+                                <InputLabel id="current-flat-type"></InputLabel>
+                                <Select
+                                labelId="current-flat-type-open-select-label"
+                                id="current-flat-type"
+                                open={this.open}
+                                onClose={this.setOpen}
+                                onOpen={this.setOpen}
+                                onChange={this.handleChange('currentFlatType')}
+                                value={values.currentFlatType}
+                                >
+                                <br/>
+                                <MenuItem value= {1}>
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value="2 Room Subsidized"> 2-Room Subsidized Flat In A Non-Mature Estate(Bought A Oct 1995 And Your First Subsidized Flat)</MenuItem>
+                                <MenuItem value="Public Rental Flat"> Public Rental Flat</MenuItem>
+                                <MenuItem value={3}>Others</MenuItem>
+                                </Select>
+                            </FormControl>
+                    {/* End of Current Living Flat */}
+
+                    {/* Start of income section */}
+                    <ListItem primaryText="What Is The Average Gross Monthly Household Income For The Past 12 Months"/>
+                        <TextField 
+                            hintText = "Enter average income here"
+                            floatingLabelFixed='income'
+                            onChange={this.handleChange('income')}
+                            defaultValue={values.income}
+                            /> 
+                        {/* End of income section */}
+
+                </List>
+
+                <RaisedButton
+                    label="Continue"
+                    primary={true}
+                    style={styles.button}
+                    onClick={this.continueToResult}
+                />
+
+                <RaisedButton
+                    label="Back"
+                    primary={false}
+                    style={styles.button}
+                    onClick={this.back}
+                />
+
+            </React.Fragment>
+        </MuiThemeProvider>
         }
         else if (this.state.isResultPage){
             return <MuiThemeProvider>
@@ -2176,11 +2298,46 @@ export class UserFormBTO extends Component {
                             secondaryText = { grantMoniesResult }
                         />
                     </List>
+                <RaisedButton
+                    label="Back To Home"
+                    primary={true}
+                    style={styles.button}
+                    href="/GrantApp"
+                />
+                <RaisedButton
+                    label="More Entries?"
+                    primary={false}
+                    style={styles.button}
+                    onClick={this.backToHome}
+                />
                 </React.Fragment>
             </MuiThemeProvider>
             
         }
-        
+        else{
+            return <MuiThemeProvider>
+            <React.Fragment>
+                <AppBar title="CPF Housing Grant Eligibility"/>
+                    <List>
+                    <ListItem
+                            primaryText = "Unfortunately You Are ot Eligible For Any Grants"
+                        />
+                    </List>
+                <RaisedButton
+                    label="Back To Home"
+                    primary={true}
+                    style={styles.button}
+                    href="/GrantApp"
+                />
+                <RaisedButton
+                    label="More Entries?"
+                    primary={false}
+                    style={styles.button}
+                    onClick={this.backToHome}
+                />
+                </React.Fragment>
+            </MuiThemeProvider>
+        }
     }
 }
 
