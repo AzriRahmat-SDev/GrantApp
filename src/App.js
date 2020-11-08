@@ -7,6 +7,7 @@ import UserFormEHG from './components/UserFormEHG';
 import HomePage from './components/HomePage';
 import HomePageDBSS from './components/HomePageDBSS';
 import UserFormBTO from './componentsbto/UserFormBTO';
+import UserFormEC from './componentsec/UserFormEC';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 
@@ -30,7 +31,8 @@ function App() {
         {/* BTO Nav section */}
         <Route exact path="/HomepageBTO" component={UserFormBTO}/>
 
-        
+        {/* EC Nav section */}
+        <Route exact path="/HomepageEC" component={UserFormEC}/>
       </div>
       </Switch>
     </Router>

@@ -2042,7 +2042,7 @@ export class UserFormBTO extends Component {
         if(this.state.isStartPage){
             return <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar title="CPF Housing Grant Eligibility"/>
+                    <AppBar title="CPF Housing Grant Eligibility (BTO)"/>
                     <List> 
 
                     {/* Start of Age section */}
@@ -2126,7 +2126,7 @@ export class UserFormBTO extends Component {
         else if (this.state.isSecondPage){
             return <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar title="CPF Housing Grant Eligibility"/>
+                    <AppBar title="CPF Housing Grant Eligibility (BTO)"/>
                     <List>
 
                         {/* Start of First timers section */}
@@ -2188,7 +2188,7 @@ export class UserFormBTO extends Component {
         else if (this.state.isSecondTimerPage){
             return <MuiThemeProvider>
             <React.Fragment>
-                <AppBar title="CPF Housing Grant Eligibility"/>
+                <AppBar title="CPF Housing Grant Eligibility (BTO)"/>
                 <List>
 
                     {/* Start of First timers section */}
@@ -2291,7 +2291,7 @@ export class UserFormBTO extends Component {
         else if (this.state.isResultPage){
             return <MuiThemeProvider>
                 <React.Fragment>
-                <AppBar title="CPF Housing Grant Eligibility"/>
+                <AppBar title="CPF Housing Grant Eligibility (BTO)"/>
                     <List>
                     <ListItem
                             primaryText = "Your Amount Of Grants You Are Eligible For"
