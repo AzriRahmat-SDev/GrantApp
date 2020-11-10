@@ -40,6 +40,7 @@ export class UserFormBTO extends Component {
         isStartPage:true,
         isSecondPage:false,
         isSecondTimerPage:false,
+        isNonCitizenSpousePage:false,
         isResultPage:false,
         
         //Ternary section
@@ -50,22 +51,6 @@ export class UserFormBTO extends Component {
         mixedTimerGrantMode:false,
         nonCitizenSpouseMode:false
         
-    }
-
-    nextStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step + 1
-        });
-        
-        
-    }
-
-    prevStep = () => {
-        const { step } = this.state;
-        this.setState({
-            step: step - 1
-        });
     }
 
     continue = e => {
@@ -80,7 +65,7 @@ export class UserFormBTO extends Component {
         e.preventDefault();
 
         this.setState({
-            isSecondPage:false,isSecondTimerPage:false,isResultPage:true,
+            isSecondPage:false,isSecondTimerPage:false,isNonCitizenSpousePage:false,isResultPage:true,
         },()=>{console.log(this.state)})
 
         if(this.state.singleGrantMode){
@@ -115,7 +100,8 @@ export class UserFormBTO extends Component {
         this.setState({
             isStartPage: true,
             isSecondPage:false,
-            isSecondTimerPage:false
+            isSecondTimerPage:false,
+            isNonCitizenSpousePage:false
         })
 
         //this.props.prevStep();
@@ -146,6 +132,7 @@ export class UserFormBTO extends Component {
             isStartPage:true,
             isSecondPage:false,
             isSecondTimerPage:false,
+            isNonCitizenSpousePage:false,
             isResultPage:false,
             
             //Ternary section
@@ -216,7 +203,7 @@ export class UserFormBTO extends Component {
             firstTimeBuyers.includes("All First-Timers")
         )
         {
-            this.setState({isSecondPage: true, nonCitizenSpouseMode:true})
+            this.setState({isSecondPage: false, nonCitizenSpouseMode:true, isNonCitizenSpousePage:true})
 
         }
     }
@@ -2022,16 +2009,17 @@ export class UserFormBTO extends Component {
             return true;
         }
     }
+
     handleChange = input => e => {
         this.setState({[input]: e.target.value});
     };
 
     handleClose = () => {
-        this.setOpen();
+        this.state.setOpen();
     };
 
     handleOpen = () => {
-        this.setOpen();
+        this.state.setOpen();
     };
 
     render() {
@@ -2288,6 +2276,67 @@ export class UserFormBTO extends Component {
             </React.Fragment>
         </MuiThemeProvider>
         }
+        else if (this.state.isNonCitizenSpousePage){
+            return <MuiThemeProvider>
+                <React.Fragment>
+                    <AppBar title="CPF Housing Grant Eligibility (BTO)"/>
+                    <List>
+
+                        {/* Start of First timers section */}
+                        <ListItem primaryText="Employment: Have At Least 1 Applicant That Has Been Working For At Least 12 Months?"/>
+                            <FormControl component="fieldset">
+                                    <RadioGroup aria-label="employmentStatus" 
+                                    name="employmentStatus" 
+                                    value={this.employmentStatus} 
+                                    onChange={this.handleChange('employmentStatus')}
+                                    defaultValue={values.employmentStatus}>
+                                    <FormControlLabel value='Yes' control={<Radio />} label="Yes" />
+                                    <FormControlLabel value='No' control={<Radio />} label="No" />
+                                </RadioGroup>
+                            </FormControl> 
+                          {/* End of Lease section */}
+
+                          {/* Start of Lease section */}
+                          <ListItem
+                            primaryText="Remaining Lease Of Flat?"/>
+                            <TextField 
+                                hintText = "Enter remaining lease here"
+                                floatingLabelFixed='lease'
+                                onChange={this.handleChange('lease')}
+                                defaultValue={values.lease}
+                              />
+                          {/* End of Lease section */}
+
+                          {/* Start of income section */}
+                          <ListItem
+                            primaryText="What Is Half of Your Average Gross Monthly Household Income For The Past 12 Months"/>
+                            <TextField 
+                                hintText = "Enter average income here"
+                                floatingLabelFixed='income'
+                                onChange={this.handleChange('income')}
+                                defaultValue={values.income}
+                              /> 
+                          {/* End of income section */}
+
+                    </List>
+
+                    <RaisedButton
+                        label="Continue"
+                        primary={true}
+                        style={styles.button}
+                        onClick={this.continueToResult}
+                    />
+
+                    <RaisedButton
+                        label="Back"
+                        primary={false}
+                        style={styles.button}
+                        onClick={this.back}
+                    />
+
+                </React.Fragment>
+            </MuiThemeProvider>
+        }
         else if (this.state.isResultPage){
             return <MuiThemeProvider>
                 <React.Fragment>
@@ -2320,7 +2369,7 @@ export class UserFormBTO extends Component {
                 <AppBar title="CPF Housing Grant Eligibility"/>
                     <List>
                     <ListItem
-                            primaryText = "Unfortunately You Are ot Eligible For Any Grants"
+                            primaryText = "Unfortunately You Are Not Eligible For Any Grants"
                         />
                     </List>
                 <RaisedButton
