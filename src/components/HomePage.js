@@ -18,7 +18,7 @@ export class HomePage extends Component {
                                             label="CLICK HERE!"
                                             variant="outline"
                                             style={styles.button}
-                                            href="/HomePageDBSS"
+                                            href="/GrantApp/HomePageDBSS"
                                             //target="_blank"
                                         />
                                 </List>

@@ -23,7 +23,7 @@ function App() {
         <Route exact path="/GrantApp" component={HomePage}/>
         <Route exact path="/HomePage" component={HomePage}/>
         {/* DBSS Nav section */}
-        <Route exact path="/HomePageDBSS" component={HomePageDBSS}/>
+        <Route exact path="/GrantApp/HomePageDBSS" component={HomePageDBSS}/>
         <Route exact path="/FGPersonalDetails" component={UserForm}/>
         <Route exact path="/EHGPersonalDetails" component={UserFormEHG}/>
         <Route exact path="/PGPersonalDetails" component={UserFormPG}/>
