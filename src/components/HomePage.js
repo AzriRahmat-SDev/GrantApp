@@ -4,6 +4,7 @@ import { List,ListItem } from 'material-ui/List';
 import AppBar from 'material-ui/AppBar';
 import RaisedButton from  'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Link } from 'react-router-dom';
 
 export class HomePage extends Component { 
     
@@ -14,13 +15,15 @@ export class HomePage extends Component {
                             <AppBar title="Welcome To The Homepage Of This App"/>
                                 <List>
                                 <ListItem primaryText="Housing Grant For DBSS Flats?"/>
-                                        <RaisedButton
+                                        <Link to="/HomePageDBSS">
+                                            <RaisedButton
                                             label="CLICK HERE!"
                                             variant="outline"
                                             style={styles.button}
-                                            href="/GrantApp/HomePageDBSS"
                                             //target="_blank"
                                         />
+                                        </Link>
+                                        
                                 </List>
                                 <List>
                                 <ListItem primaryText="Housing Grant For HDB(BTO) Flats?"/>

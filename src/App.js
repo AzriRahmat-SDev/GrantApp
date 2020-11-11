@@ -8,7 +8,7 @@ import HomePage from './components/HomePage';
 import HomePageDBSS from './components/HomePageDBSS';
 import UserFormBTO from './componentsbto/UserFormBTO';
 import UserFormEC from './componentsec/UserFormEC';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
 
 
 
@@ -20,10 +20,8 @@ function App() {
       <div className="App">
         {/* <Navigation/> */}
         <Route exact path="/" component={HomePage}/>
-        <Route exact path="/GrantApp" component={HomePage}/>
-        <Route exact path="/HomePage" component={HomePage}/>
         {/* DBSS Nav section */}
-        <Route exact path="/GrantApp/HomePageDBSS" component={HomePageDBSS}/>
+        <Route exact path="/HomePageDBSS" component={HomePageDBSS}/>
         <Route exact path="/FGPersonalDetails" component={UserForm}/>
         <Route exact path="/EHGPersonalDetails" component={UserFormEHG}/>
         <Route exact path="/PGPersonalDetails" component={UserFormPG}/>
