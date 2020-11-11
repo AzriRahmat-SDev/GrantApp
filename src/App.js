@@ -19,7 +19,7 @@ function App() {
       <Switch>
       <div className="App">
         {/* <Navigation/> */}
-        <Route exact path="/" component={HomePage}/>
+        <Route exact path="" component={HomePage}/>
         {/* DBSS Nav section */}
         <Route exact path="/HomePageDBSS" component={HomePageDBSS}/>
         <Route exact path="/FGPersonalDetails" component={UserForm}/>
