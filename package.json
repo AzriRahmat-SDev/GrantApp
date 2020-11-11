@@ -1,6 +1,6 @@
 {
   "name": "grantapp",
-  "homepage": "https://AzriRahmat-SDev.github.io/GrantApp",
+  "homepage": "https://AzriRahmat-SDev.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://github.com/AzriRahmat-SDev/GrantApp.git",
+    "deploy": "gh-pages -b master -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
