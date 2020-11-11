@@ -23,27 +23,28 @@ export class HomePage extends Component {
                                             //target="_blank"
                                         />
                                         </Link>
-                                        
                                 </List>
                                 <List>
                                 <ListItem primaryText="Housing Grant For HDB(BTO) Flats?"/>
+                                        <Link to="/HomepageBTO">
                                         <RaisedButton
                                             label="CLICK HERE!"
                                             variant="outline"
                                             style={styles.button}
-                                            href="/HomepageBTO"
                                             //target="_blank"
                                         />
+                                        </Link>
                                 </List>
                                 <List>
                                 <ListItem primaryText="Housing Grant For EC Flats?"/>
+                                        <Link to="/HomepageEC">
                                         <RaisedButton
                                             label="CLICK HERE!"
                                             variant="outline"
                                             style={styles.button}
-                                            href="/HomepageEC"
                                             //target="_blank"
                                         />
+                                        </Link>
                                 </List>
                         </React.Fragment>
             </MuiThemeProvider>
