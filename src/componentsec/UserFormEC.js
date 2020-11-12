@@ -191,7 +191,7 @@ export class UserFormEC extends Component {
     toCheckForCalculationForSingleGrant = () =>{
         if(
             this.state.citizenship.includes("SC") &&
-            (this.state.income >= 0 && this.state.income <= 10000) 
+            (this.state.income > 0 && this.state.income <= 10000) 
         )
         {
             this.setState({grantMoniesResult:'$15000'})
@@ -222,7 +222,7 @@ export class UserFormEC extends Component {
     toCheckForCalculationForJointSingleGrant = () =>{
         if(
             this.state.citizenship.includes("SC/SC") &&
-            (this.state.income >= 0 && this.state.income <= 10000) 
+            (this.state.income > 0 && this.state.income <= 10000) 
         )
         {
             this.setState({grantMoniesResult:'$15000'})
@@ -253,7 +253,7 @@ export class UserFormEC extends Component {
     toCheckForCalculationForFamilyGrant = () =>{
         if(
             this.state.citizenship.includes("SC/SC") &&
-            (this.state.income >= 0 && this.state.income <= 10000) 
+            (this.state.income > 0 && this.state.income <= 10000) 
         )
         {
             this.setState({grantMoniesResult:'$30000'})
@@ -300,7 +300,7 @@ export class UserFormEC extends Component {
     toCheckForCalculationForMixedFamilyGrant = () =>{
         if(
             this.state.citizenship.includes("SC/SC") &&
-            (this.state.income >= 0 && this.state.income <= 10000) 
+            (this.state.income > 0 && this.state.income <= 10000) 
         )
         {
             this.setState({grantMoniesResult:'$15000'})
