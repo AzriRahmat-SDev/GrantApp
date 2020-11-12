@@ -221,7 +221,7 @@ export class UserFormBTO extends Component {
         if(
             this.state.employmentStatus.includes('Yes') &&
             (this.state.lease >= 20 && this.state.lease <= 100) &&
-            (this.state.income >= 0 && this.state.income < 750) 
+            (this.state.income > 0 && this.state.income < 750) 
         )
         {
             let proRatedVariable = this.state.lease/(95-this.state.currentAge)
@@ -570,6 +570,11 @@ export class UserFormBTO extends Component {
                 })
             }
             return true;
+        }
+        else{
+            this.setState({
+                grantMoniesResult: "Sorry But You Don't Qualify For Any Grants"
+            })
         }
     }
 
@@ -577,7 +582,7 @@ export class UserFormBTO extends Component {
         if(
             this.state.employmentStatus.includes('Yes') &&
             (this.state.lease >= 20 && this.state.lease <= 100) &&
-            (this.state.income >= 0 && this.state.income < 1500) 
+            (this.state.income > 0 && this.state.income < 1500) 
         )
         {
             let proRatedVariable = this.state.lease/(95-this.state.currentAge)
@@ -926,6 +931,11 @@ export class UserFormBTO extends Component {
                 })
             }
             return true;
+        }
+        else{
+            this.setState({
+                grantMoniesResult: "Sorry But You Don't Qualify For Any Grants"
+            })
         }
     }
 
@@ -933,7 +943,7 @@ export class UserFormBTO extends Component {
         if(
             this.state.employmentStatus.includes('Yes') &&
             (this.state.lease >= 20 && this.state.lease <= 100) &&
-            (this.state.income >= 0 && this.state.income < 1500) 
+            (this.state.income > 0 && this.state.income < 1500) 
         )
         {
             let proRatedVariable = this.state.lease/(95-this.state.currentAge)
@@ -1283,13 +1293,18 @@ export class UserFormBTO extends Component {
             }
             return true;
         }
+        else{
+            this.setState({
+                grantMoniesResult: "Sorry But You Don't Qualify For Any Grants"
+            })
+        }
     }
 
     toCheckForCalculationForMixedFamilyGrant = () =>{
         if(
             this.state.employmentStatus.includes('Yes') &&
             (this.state.lease >= 20 && this.state.lease <= 100) &&
-            (this.state.income >= 0 && this.state.income < 750) 
+            (this.state.income > 0 && this.state.income < 750) 
         )
         {
             let proRatedVariable = this.state.lease/(95-this.state.currentAge)
@@ -1638,6 +1653,11 @@ export class UserFormBTO extends Component {
                 })
             }
             return true;
+        }
+        else{
+            this.setState({
+                grantMoniesResult: "Sorry But You Don't Qualify For Any Grants"
+            })
         }
     }
 
@@ -1651,6 +1671,11 @@ export class UserFormBTO extends Component {
         {
             this.setState({grantMoniesResult: '$15000'},()=>{console.log(this.state.grantMoniesResult)})
         }
+        else{
+            this.setState({
+                grantMoniesResult: "Sorry But You Don't Qualify For Any Grants"
+            })
+        }
         return true;
     }
 
@@ -1658,7 +1683,7 @@ export class UserFormBTO extends Component {
         if(
             this.state.employmentStatus.includes('Yes') &&
             (this.state.lease >= 20 && this.state.lease <= 100) &&
-            (this.state.income >= 0 && this.state.income < 750) 
+            (this.state.income > 0 && this.state.income < 750) 
         )
         {
             let proRatedVariable = this.state.lease/(95-this.state.currentAge)
@@ -2007,6 +2032,11 @@ export class UserFormBTO extends Component {
                 })
             }
             return true;
+        }
+        else{
+            this.setState({
+                grantMoniesResult: "Sorry But You Don't Qualify For Any Grants"
+            })
         }
     }
 
